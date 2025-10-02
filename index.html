@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <!-- SEO & Description -->
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>webStudioArts | Web Design for Creatives & Local Businesses | Pacific Northwest</title>
+   <meta name="description"
+      content="Accessible web design for artists, musicians, restaurants, and local service businesses across the Pacific Northwest. Simple, maintainable websites that grow with you.">
+   <meta name="author" content="cesily.stevens.webdev@gmail.com">
+   <!--Favicon-->
+   <link rel="icon" type="image/png" href="/assets/images/favicon/favicon-96x96.png" sizes="96x96" />
+   <link rel="icon" type="image/svg+xml" href="/assets/images/favicon/favicon.svg" />
+   <link rel="shortcut icon" href="/assets/images/favicon/favicon.ico" />
+   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png" />
+   <meta name="apple-mobile-web-app-title" content="RossiFlame" />
+   <link rel="manifest" href="/assets/images/favicon/site.webmanifest" />
+   <!--Style Sheets-->
+   <link rel="stylesheet" href="assets/styles/reset.css" />
+   <link rel="stylesheet" href="assets/styles/styles.css" />
+   <!--Font Connections-->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <!--decorative-font: Chakra Petch, Space Mono, monospace;-->
+   <link href="'https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&display=swap'">
+   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet">
+   <!--heading-font: Lexend, Outfit, sans serif;-->
+   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100&family=Outfit:wght@100&display=swap"
+      rel="stylesheet">
+   <!---body-font: Inter, Opens Sans, sans serif;-->
+   <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet">
+   <!--Font Awesome-->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <!-- Open Graph for social sharing -->
+   <meta property="og:title" content="webStudioArts">
+   <meta property="og:description"
+      content="webStudioArts - Web Design for Creatives & Local Businesses | Pacific Northwest">
+   <meta property="og:type" content="website">
+   <meta property="og:url" content="https://webstudioarts.com/">
+   <meta property="og:image" content="assets/images/logos/13.1-LogoFancy-BlackBkGrd.webp">
+
+</head>
+
+<body>
+   <header>
+      <nav>
+         <div id="logo-container">
+            <img src="/Users/sevenroot/Sites/webStudioArts/assets/images/webStudioArts-Logo120w.webp"
+               alt="Logo Design: webStudioArts">
+         </div>
+         <a href="#webStudio" class="nav-link">web</a>
+         <a href="#branding" class="nav-link">img</a>
+         <a href="#graphics" class="nav-link">gfx</a>
+         <a href="#digiArt" class="nav-link">art</a>
+      </nav>
+
+
+
+      <p id="greeting-animation"></p>
+
+      <p id="name-drop"></p>
+
+      <h1 id="h1-animation" class="landing"></h1>
+
+      <h2 class="landing">
+         <p>My name is Cesily
+            <span>and I</span>
+            <span>digital design</span>
+         </p>
+      </h2>
+
+      <h3 class="landing">I craft accessible websites for artists, musicians, restaurants, and service professionals
+         across the Pacific Northwest.</h3>
+
+      <h4 class="landing">And thank you for visitng!</h4>
+
+   </header>
+
+   <script>
+      // Flag to ensure animation only runs once
+      let animationCompleted = false;
+
+      if (!animationCompleted) {
+         // Phase 1: Type "Greetings from >>>"
+         const greetingText = "Greetings from >>>";
+         const greetingElement = document.getElementById('greeting-animation');
+         let currentText = "";
+         let letterIndex = 0;
+
+         function typeNextLetter() {
+            // Show the element on first letter
+            if (letterIndex === 0) {
+               greetingElement.classList.add('show');
+            }
+
+            currentText += greetingText[letterIndex];
+            greetingElement.innerHTML = currentText + '<span class="cursor"></span>';
+            letterIndex++;
+
+            if (letterIndex < greetingText.length) {
+               setTimeout(typeNextLetter, 30);
+            } else {
+               // Typing complete, make last arrow green and blink
+               setTimeout(makeLastArrowGreenAndBlink, 300);
+            }
+         }
+
+         function makeLastArrowGreenAndBlink() {
+            const textWithoutCursor = currentText.slice(0, -1);
+            const lastArrow = currentText.slice(-1);
+            greetingElement.innerHTML = textWithoutCursor + '<span class="green-arrow" id="arrow-blink">' + lastArrow + '</span>';
+
+            const arrowSpan = document.getElementById('arrow-blink');
+            let blinkCount = 0;
+
+            function blinkArrow() {
+               arrowSpan.classList.add('blink-arrow');
+               setTimeout(() => {
+                  arrowSpan.classList.remove('blink-arrow');
+                  blinkCount++;
+                  if (blinkCount < 3) {
+                     setTimeout(blinkArrow, 0);
+                  } else {
+                     // After 3 blinks, hide and show name-drop
+                     setTimeout(() => {
+                        console.log('Hiding greeting');
+                        greetingElement.classList.add('hidden');
+
+                        startNameDropAnimation();
+                     }, 300);
+                  }
+               }, 500);
+            }
+
+            blinkArrow();
+         }
+
+         // Phase 2: Type "webStudioDesign >>>"
+         function startNameDropAnimation() {
+            const nameDropText = "webStudioArts >>>";
+            const nameDropElement = document.getElementById('name-drop');
+            nameDropElement.classList.add('show');
+            let nameText = "";
+            let nameIndex = 0;
+
+            function typeNameLetter() {
+               nameText += nameDropText[nameIndex];
+               nameDropElement.innerHTML = nameText + '<span class="cursor"></span>';
+               nameIndex++;
+
+               if (nameIndex < nameDropText.length) {
+                  setTimeout(typeNameLetter, 100);
+               } else {
+                  setTimeout(makeNameArrowGreenAndBlink, 500);
+               }
+            }
+
+            function makeNameArrowGreenAndBlink() {
+               const textWithoutCursor = nameText.slice(0, -1);
+               const lastArrow = nameText.slice(-1);
+               nameDropElement.innerHTML = textWithoutCursor + '<span class="green-arrow blink-arrow">' + lastArrow + '</span>';
+
+               // After 3 blinks (1.5s), move to corner
+               setTimeout(() => {
+                  nameDropElement.classList.add('move-to-corner');
+
+                  // After move animation completes, replace with logo
+                  setTimeout(() => {
+                     console.log('Hiding name-drop');
+                     nameDropElement.classList.add('hidden');
+                     showLogo();
+                  }, 1000);
+               }, 1500);
+            }
+
+            typeNameLetter();
+         }
+
+         // Phase 3: Show logo
+         function showLogo() {
+            const logoContainer = document.getElementById('logo-container');
+
+            // Force browser to recognize the initial state before animating
+            logoContainer.offsetHeight; // Trigger reflow
+
+            // Show it
+            logoContainer.classList.add('show');
+
+            // Show h1 with css slide
+            setTimeout(() => {
+               requestAnimationFrame(() => {
+                  const h1Element = document.getElementById('h1-animation');
+                  h1Element.innerHTML = "Web Design for Creatives and Local Businesses";
+                  h1Element.classList.add('show');
+                  animationCompleted = true;
+               });
+            }, 1500);
+         }
+
+
+         // Start the animation
+         typeNextLetter();
+      }
+   </script>
+</body>
+
+</html>

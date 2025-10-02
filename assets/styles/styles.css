@@ -1,0 +1,227 @@
+:root {
+	--background-color: #454545;
+	--decorative-font: Chakra Petch, Space Mono, monospace;
+	--heading-font: Lexend, Outfit, sans serif;
+	--body-font: Inter, Opens Sans, sans serif;
+	--primary-text: #DDDCE5;
+}
+
+header {
+	background: linear-gradient(rgba(26, 26, 35, 0.75), rgba(26, 26, 35, 0.75)),
+		url("../../assets/images/MarbleBackGround.png") no-repeat center center fixed;
+	background-size: cover;
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-template-rows: repeat(4, 1fr);
+	gap: 24px;
+	padding-top: 24px;
+	min-height: 100dvh;
+}
+
+nav {
+	grid-column: 2/4;
+	grid-row: span 3;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	overflow: hidden;
+	background: rgb(26, 26, 35);
+	border-left: 3px solid rgb(221, 220, 229);
+	border-right: 3px solid rgb(221, 220, 229);
+	border-bottom: 3px solid rgb(221, 220, 229);
+	will-change: contents;
+	opacity: 0;
+	transform: translateY(-100%);
+	animation: slideInNav 1s ease-out forwards;
+	margin-top: -24px;
+	/* Pulls nav back to screen top */
+}
+
+nav>* {
+	transition: all 2s ease-out;
+}
+
+nav a {
+	font-size: calc(1.5em + 1vh);
+	font-family: var(--heading-font);
+	color: var(--primary-text);
+	text-decoration: none;
+}
+
+nav a:hover {
+	color: hsla(219, 48%, 30%, 0.88);
+}
+
+.nav-link {
+	transition: all 1s ease-out;
+}
+
+#greeting-animation {
+	grid-column: 5/12;
+	grid-row: 1;
+	display: flex;
+	font-size: clamp(2rem, 4vw, 12rem);
+	/* scales based on viewport width */
+	line-height: 1.1;
+	align-items: center;
+	justify-content: flex-end;
+	text-align: right;
+	white-space: nowrap;
+	opacity: 0;
+}
+
+#greeting-animation.show {
+	opacity: 1;
+}
+
+#name-drop {
+	grid-column: 5/12;
+	grid-row: 1;
+	display: flex;
+	font-size: clamp(2rem, 4vw, 12rem);
+	/* scales based on viewport width */
+	line-height: 1.1;
+	align-items: center;
+	justify-content: flex-end;
+	text-align: right;
+	white-space: nowrap;
+	opacity: 0;
+}
+
+#name-drop.show {
+	opacity: 1;
+}
+
+#name-drop.move-to-corner {
+	transition: all 1s ease-in-out;
+	top: 30px;
+	left: 30px;
+	transform: translate(0, 0);
+}
+
+#logo-container {
+	opacity: 0;
+	pointer-events: none;
+	height: 0;
+	overflow: hidden;
+	transition: height 1s ease-out, opacity 1s ease-out;
+}
+
+#logo-container img {
+	height: 120px;
+	width: auto;
+}
+
+#logo-container.show {
+	opacity: 1;
+	pointer-events: auto;
+	height: 120px;
+}
+
+h1.landing {
+	font-family: var(--heading-font);
+	color: var(--primary-text);
+	grid-column: 5/-1;
+	grid-row: 1;
+	display: flex;
+	font-size: clamp(2rem, 4vw, 12rem);
+	/* scales based on viewport width */
+	line-height: 1.1;
+	align-items: center;
+	justify-content: flex-end;
+	text-align: right;
+}
+
+#h1-animation {
+	opacity: 0;
+	transform: translateX(100%);
+	transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+	background: rgb(26, 26, 35);
+	border-left: 3px solid rgb(221, 220, 229);
+	border-top: 3px solid rgb(221, 220, 229);
+	border-bottom: 3px solid rgb(221, 220, 229);
+	padding: 20px 5% 20px 20px;
+	will-change: transform, opacity;
+}
+
+#h1-animation.show {
+	opacity: 1;
+	transform: translateX(0);
+}
+
+h2.landing,
+h3.landing,
+h4.landing,
+#greeting-animation,
+#name-drop {
+	font-family: var(--decorative-font);
+	color: var(--primary-text);
+	font-weight: lighter;
+}
+
+h2.landing {
+	grid-column: 7/12;
+	grid-row: 2;
+	display: flex;
+	flex-direction: column;
+	font-size: clamp(2rem, 4vh, 12rem);
+	/* scales based on viewport HEIGHT */
+	line-height: 1.0;
+}
+
+h3.landing {
+	grid-column: 8/12;
+	grid-row: 3;
+
+}
+
+h4.landing {
+	grid-column: 5/12;
+	grid-row: 4;
+}
+
+.green-arrow {
+	color: #01fe01;
+}
+
+.blink-arrow {
+	animation: blink-green 0.5s;
+}
+
+@keyframes blink {
+
+	0%,
+	49% {
+		opacity: 1;
+	}
+
+	50%,
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes blink-green {
+
+	0%,
+	100% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0;
+	}
+}
+
+@keyframes slideInNav {
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.hidden {
+	opacity: 0 !important;
+	pointer-events: none;
+}
