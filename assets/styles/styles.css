@@ -1,6 +1,7 @@
 :root {
 	--background-color: #454545;
 	--box-color: rgb(26, 26, 35);
+	--border-color: rgb(106, 106, 110);
 	--decorative-font: Chakra Petch, Space Mono, monospace;
 	--heading-font: Lexend, Outfit, sans serif;
 	--body-font: Inter, Opens Sans, sans serif;
@@ -16,7 +17,22 @@ header {
 	grid-template-rows: repeat(4, 1fr);
 	gap: 24px;
 	padding-top: 24px;
-	min-height: 100dvh;
+	min-height: 100vh;
+	position: relative;
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    top: 90vh;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: 
+        /* The swoosh curve - ONE graceful arc */
+        radial-gradient(ellipse 70% 150px at 50% -50px, transparent 100%, #a4a3bd 100%);
+    z-index: 10;
+    pointer-events: none;
 }
 
 nav {
@@ -119,7 +135,7 @@ h1.landing {
 	transform: translateY(100%);
 	transition: transform 0.8s ease-out, opacity 0.8s ease-out;
 	grid-column: 7/12;
-	grid-row: 3/-1;
+	grid-row: 3/ span 5;
 	display: flex;
 	flex-direction: column;
 	background: var(--box-color);
@@ -127,7 +143,7 @@ h1.landing {
 	border-top: 3px solid rgb(221, 220, 229);
 	border-right: 3px solid rgb(221, 220, 229);
 	justify-content: space-around;
-	padding: 0 24px;
+	padding: 0 24px 1em 24px;
 	will-change: transform, opacity;
 }
 
@@ -292,4 +308,37 @@ h2.landing {
 .hidden {
 	opacity: 0 !important;
 	pointer-events: none;
+}
+/*************************************************/
+/***************** About Page ********************/
+/*************************************************/
+main {
+	height: 100dvh;
+}
+.about {
+	min-height: 100vh;
+	background: linear-gradient(rgba(26, 26, 35, 0.75), rgba(26, 26, 35, 0.75)),
+		url("../../assets/images/MarbleBackGround.png") no-repeat center center fixed;
+	background-size: cover;
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-template-rows: repeat(4, 1fr);
+	gap: 24px;
+	padding-top: 24px;
+}
+.about-h1 {
+	grid-column: 2/11;
+	grid-row: 1;
+}
+.history {
+	grid-column: 2/6;
+	grid-row: 2;
+}
+.philosophy {
+	grid-column: 3/7;
+	grid-row: 3;
+}
+.fun-facts {
+	grid-column: 4/9;
+	grid-row: 4;
 }
