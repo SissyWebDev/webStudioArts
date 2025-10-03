@@ -1,5 +1,6 @@
 :root {
 	--background-color: #454545;
+	--box-color: rgb(26, 26, 35);
 	--decorative-font: Chakra Petch, Space Mono, monospace;
 	--heading-font: Lexend, Outfit, sans serif;
 	--body-font: Inter, Opens Sans, sans serif;
@@ -26,7 +27,7 @@ nav {
 	justify-content: space-evenly;
 	align-items: center;
 	overflow: hidden;
-	background: rgb(26, 26, 35);
+	background: var(--box-color);
 	border-left: 3px solid rgb(221, 220, 229);
 	border-right: 3px solid rgb(221, 220, 229);
 	border-bottom: 3px solid rgb(221, 220, 229);
@@ -57,49 +58,6 @@ nav a:hover {
 	transition: all 1s ease-out;
 }
 
-#greeting-animation {
-	grid-column: 5/12;
-	grid-row: 1;
-	display: flex;
-	font-size: clamp(2rem, 4vw, 12rem);
-	/* scales based on viewport width */
-	line-height: 1.1;
-	align-items: center;
-	justify-content: flex-end;
-	text-align: right;
-	white-space: nowrap;
-	opacity: 0;
-}
-
-#greeting-animation.show {
-	opacity: 1;
-}
-
-#name-drop {
-	grid-column: 5/12;
-	grid-row: 1;
-	display: flex;
-	font-size: clamp(2rem, 4vw, 12rem);
-	/* scales based on viewport width */
-	line-height: 1.1;
-	align-items: center;
-	justify-content: flex-end;
-	text-align: right;
-	white-space: nowrap;
-	opacity: 0;
-}
-
-#name-drop.show {
-	opacity: 1;
-}
-
-#name-drop.move-to-corner {
-	transition: all 1s ease-in-out;
-	top: 30px;
-	left: 30px;
-	transform: translate(0, 0);
-}
-
 #logo-container {
 	opacity: 0;
 	pointer-events: none;
@@ -119,6 +77,7 @@ nav a:hover {
 	height: 120px;
 }
 
+/*Slides in from right*/
 h1.landing {
 	font-family: var(--heading-font);
 	color: var(--primary-text);
@@ -137,7 +96,8 @@ h1.landing {
 	opacity: 0;
 	transform: translateX(100%);
 	transition: transform 0.8s ease-out, opacity 0.8s ease-out;
-	background: rgb(26, 26, 35);
+	overlfow: hidden;
+	background-color: var(--box-color);
 	border-left: 3px solid rgb(221, 220, 229);
 	border-top: 3px solid rgb(221, 220, 229);
 	border-bottom: 3px solid rgb(221, 220, 229);
@@ -150,68 +110,176 @@ h1.landing {
 	transform: translateX(0);
 }
 
-h2.landing,
-h3.landing,
-h4.landing,
-#greeting-animation,
-#name-drop {
+/*Slides up from bottom*/
+#landing-content {
+	opacity: 0;
+	pointer-events: none;
+	/* height: 0; */
+	/* overflow: hidden; */
+	transform: translateY(100%);
+	transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+	grid-column: 7/12;
+	grid-row: 3/-1;
+	display: flex;
+	flex-direction: column;
+	background: var(--box-color);
+	border-left: 3px solid rgb(221, 220, 229);
+	border-top: 3px solid rgb(221, 220, 229);
+	border-right: 3px solid rgb(221, 220, 229);
+	justify-content: space-around;
+	padding: 0 24px;
+	will-change: transform, opacity;
+}
+
+#landing-content.show {
+	opacity: 1;
+	pointer-events: auto;
+	transform: translateY(0);
+}
+
+/*Inside landing-content*/
+h2.landing {
 	font-family: var(--decorative-font);
 	color: var(--primary-text);
 	font-weight: lighter;
+	font-size: 3em;
+}
+/*************************************************/
+/*****Animations classes for Matrix Heart Rain****/
+/*************************************************/
+.heart-animation-container {
+   display: inline-block;
+   position: relative;
+   width: 2em; /* Adjust based on your h2 font-size */
+   height: 1.2em; /* Height to match line-height */
+   vertical-align: middle;
+   margin: 0 0.3em; /* Spacing between text */
 }
 
-h2.landing {
-	grid-column: 7/12;
-	grid-row: 2;
-	display: flex;
-	flex-direction: column;
-	font-size: clamp(2rem, 4vh, 12rem);
-	/* scales based on viewport HEIGHT */
-	line-height: 1.0;
+/* Rain Column Positioning */
+.heart-column {
+   position: absolute;
+   width: 0.4em;
+   height: 0.4em;
+   opacity: 0;
 }
 
-h3.landing {
-	grid-column: 8/12;
-	grid-row: 3;
+/* Horizontal positions */
+.l10 { left: 10%; }
+.l50 { left: 50%; transform: translateX(-50%); } /* Center align */
+.l90 { left: 90%; transform: translateX(-100%); } /* Right align */
 
+/* Starting positions (above container) */
+.t1 { top: -0.5em; }
+.t2 { top: -0.5em; }
+.t3 { top: -0.5em; }
+
+/* Small falling hearts */
+.heart-small {
+   width: 0.4em;
+   height: 0.4em;
+   display: block;
+   filter: drop-shadow(0 0 2px rgba(0, 255, 0, 0.8)) brightness(1.2);
 }
 
-h4.landing {
-	grid-column: 5/12;
-	grid-row: 4;
+/* Large static heart */
+.heart-large {
+   position: absolute;
+   width: 3em;
+   height: 3em;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   opacity: 0;
+   filter: drop-shadow(0 0 4px rgba(0, 255, 0, 0.6));
 }
 
-.green-arrow {
-	color: #01fe01;
+/* Animation States - Added via JS */
+.heart-column.animate {
+   animation: heart-fall 3s ease-in forwards,
+              heart-spin 1s linear infinite;
 }
 
-.blink-arrow {
-	animation: blink-green 0.5s;
+.heart-column.animate.delay-1 {
+   animation-delay: 0s;
 }
 
-@keyframes blink {
-
-	0%,
-	49% {
-		opacity: 1;
-	}
-
-	50%,
-	100% {
-		opacity: 0;
-	}
+.heart-column.animate.delay-2 {
+   animation-delay: 0.3s;
 }
 
-@keyframes blink-green {
+.heart-column.animate.delay-3 {
+   animation-delay: 0.6s;
+}
 
-	0%,
-	100% {
-		opacity: 1;
-	}
+.heart-large.show {
+   animation: heart-fade-in 0.8s ease-out 2.5s forwards;
+}
 
-	50% {
-		opacity: 0;
-	}
+/* Keyframe Animations */
+@keyframes heart-fall {
+   0% {
+      top: -0.5em;
+      opacity: 0;
+   }
+   5% {
+      opacity: 1;
+   }
+   85% {
+      opacity: 1;
+   }
+   100% {
+      top: calc(100% + 2em);
+      opacity: 0;
+   }
+}
+
+@keyframes heart-spin {
+   to {
+      transform: rotateY(180deg);
+   }
+}
+
+@keyframes heart-fade-in {
+   from {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.8);
+   }
+   to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+   }
+}
+
+/*************************************************/
+/***************End of Heart Animation************/
+/*************************************************/
+
+
+.landing-intro {
+	font-family: var(--body-font);
+	letter-spacing: 0.015em;
+	color: var(--primary-text);
+	font-size: 1.5em;
+}
+
+.landing-thanks {
+	font-family: var(--heading-font);
+	color: var(--primary-text);
+	font-size: 1.5em;
+}
+
+.landing-intro,
+.landing-thanks {
+    opacity: 0;
+    transform: translateY(20px); /* Starting position for slide-up */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.landing-intro.show,
+.landing-thanks.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 @keyframes slideInNav {

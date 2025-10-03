@@ -9,13 +9,7 @@
    <meta name="description"
       content="Accessible web design for artists, musicians, restaurants, and local service businesses across the Pacific Northwest. Simple, maintainable websites that grow with you.">
    <meta name="author" content="cesily.stevens.webdev@gmail.com">
-   <!--Favicon-->
-   <link rel="icon" type="image/png" href="/assets/images/favicon/favicon-96x96.png" sizes="96x96" />
-   <link rel="icon" type="image/svg+xml" href="/assets/images/favicon/favicon.svg" />
-   <link rel="shortcut icon" href="/assets/images/favicon/favicon.ico" />
-   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png" />
-   <meta name="apple-mobile-web-app-title" content="RossiFlame" />
-   <link rel="manifest" href="/assets/images/favicon/site.webmanifest" />
+
    <!--Style Sheets-->
    <link rel="stylesheet" href="assets/styles/reset.css" />
    <link rel="stylesheet" href="assets/styles/styles.css" />
@@ -30,9 +24,7 @@
    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100&family=Outfit:wght@100&display=swap"
       rel="stylesheet">
    <!---body-font: Inter, Opens Sans, sans serif;-->
-   <link
-      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-      rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100&display=swap" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
       rel="stylesheet">
    <!--Font Awesome-->
@@ -51,7 +43,7 @@
    <header>
       <nav>
          <div id="logo-container">
-            <img src="/Users/sevenroot/Sites/webStudioArts/assets/images/webStudioArts-Logo120w.webp"
+            <img src="assets/images/webStudioArts-Logo120w.webp"
                alt="Logo Design: webStudioArts">
          </div>
          <a href="#webStudio" class="nav-link">web</a>
@@ -60,154 +52,132 @@
          <a href="#digiArt" class="nav-link">art</a>
       </nav>
 
-
-
-      <p id="greeting-animation"></p>
-
-      <p id="name-drop"></p>
-
       <h1 id="h1-animation" class="landing"></h1>
-
-      <h2 class="landing">
-         <p>My name is Cesily
+      <div id="landing-content">
+         <h2 class="landing">
+            Hello, my name is Cesily
             <span>and I</span>
+
+            <span class="heart-animation-container">
+               <!-- Rain columns -->
+               <div class="heart-column l10 t1">
+                  <img src="assets/images/tinyHeart48w.png" alt="" class="small green heart with internet green glow">
+               </div>
+               <div class="heart-column l50 t2">
+                  <img src="assets/images/tinyHeart48w.png" alt="" class="small green heart with internet green glow">
+               </div>
+               <div class="heart-column l90 t3">
+                  <img src="assets/images/tinyHeart48w.png" alt="" class="small green heart with internet green glow">
+               </div>
+               
+               <!-- Large static heart (fades in at end) -->
+               <img src="assets/images/largeHeart192w.png" alt="" class="large green heart with internet green glow">
+            </span>
+            
             <span>digital design</span>
+         </h2>
+         
+         <div class="landing-intro">
+            <p>   
+               I craft accessible websites for artists, musicians, restaurants, 
+               and service professionals across the Pacific Northwest. 
+            </p>
+            
+            <p>
+               Please take a few moments and have a look around.
+            </p>
+         </div>
+         
+         <p class="landing-thanks">
+            Thank you for visiting!
          </p>
-      </h2>
-
-      <h3 class="landing">I craft accessible websites for artists, musicians, restaurants, and service professionals
-         across the Pacific Northwest.</h3>
-
-      <h4 class="landing">And thank you for visitng!</h4>
-
+         
+      </div>
    </header>
 
    <script>
-      // Flag to ensure animation only runs once
-      let animationCompleted = false;
+   //Element #1: Animation Only Runs Once per Reload
+   let animationCompleted = false;
 
-      if (!animationCompleted) {
-         // Phase 1: Type "Greetings from >>>"
-         const greetingText = "Greetings from >>>";
-         const greetingElement = document.getElementById('greeting-animation');
-         let currentText = "";
-         let letterIndex = 0;
+   //Element #2: Animation Only Runs Once per Reload--Wrap whole thing in "if" statement linked to sequence completion
+   if (!animationCompleted) {
+      // Sequence the animations with delays
+      
+      // Nav slides in on page load (CSS handles this automatically)
 
-         function typeNextLetter() {
-            // Show the element on first letter
-            if (letterIndex === 0) {
-               greetingElement.classList.add('show');
-            }
+      // After Nav slides from top left, H1 slides from right 
+      setTimeout(() => {
+         const h1Element = document.getElementById('h1-animation');
+         h1Element.innerHTML = "Web Design for Creatives, Makers, and Business Owners";
+         h1Element.classList.add('show');
+         animationCompleted = true;
+      }, 1000);
+      
+      // After H1 completes (1s), show logo
+      setTimeout(() => {
+         const logoContainer = document.getElementById('logo-container');
+         logoContainer.classList.add('show');
+      }, 2000);
+      
+      //After logo loads, landing-content comes up from bottom right
+      setTimeout(() => {
+         const landingContent = document.getElementById('landing-content');
+         landingContent.classList.add('show');
 
-            currentText += greetingText[letterIndex];
-            greetingElement.innerHTML = currentText + '<span class="cursor"></span>';
-            letterIndex++;
+          // After landing-content completes its 0.8s transition, start heart animation
+         setTimeout(() => {
+            triggerHeartAnimation();
+         }, 800); // Wait for landing-content transition to complete
+         
+      }, 3000);
 
-            if (letterIndex < greetingText.length) {
-               setTimeout(typeNextLetter, 30);
-            } else {
-               // Typing complete, make last arrow green and blink
-               setTimeout(makeLastArrowGreenAndBlink, 300);
-            }
-         }
-
-         function makeLastArrowGreenAndBlink() {
-            const textWithoutCursor = currentText.slice(0, -1);
-            const lastArrow = currentText.slice(-1);
-            greetingElement.innerHTML = textWithoutCursor + '<span class="green-arrow" id="arrow-blink">' + lastArrow + '</span>';
-
-            const arrowSpan = document.getElementById('arrow-blink');
-            let blinkCount = 0;
-
-            function blinkArrow() {
-               arrowSpan.classList.add('blink-arrow');
-               setTimeout(() => {
-                  arrowSpan.classList.remove('blink-arrow');
-                  blinkCount++;
-                  if (blinkCount < 3) {
-                     setTimeout(blinkArrow, 0);
-                  } else {
-                     // After 3 blinks, hide and show name-drop
-                     setTimeout(() => {
-                        console.log('Hiding greeting');
-                        greetingElement.classList.add('hidden');
-
-                        startNameDropAnimation();
-                     }, 300);
-                  }
-               }, 500);
-            }
-
-            blinkArrow();
-         }
-
-         // Phase 2: Type "webStudioDesign >>>"
-         function startNameDropAnimation() {
-            const nameDropText = "webStudioArts >>>";
-            const nameDropElement = document.getElementById('name-drop');
-            nameDropElement.classList.add('show');
-            let nameText = "";
-            let nameIndex = 0;
-
-            function typeNameLetter() {
-               nameText += nameDropText[nameIndex];
-               nameDropElement.innerHTML = nameText + '<span class="cursor"></span>';
-               nameIndex++;
-
-               if (nameIndex < nameDropText.length) {
-                  setTimeout(typeNameLetter, 100);
+      // Heart animation sequence
+      
+      function triggerHeartAnimation() {
+         // Start the falling hearts with cascade
+         const columns = document.querySelectorAll('.heart-column');
+         console.log('Found columns:', columns.length); // Should show 3
+         columns.forEach((col, index) => {
+            col.classList.add('animate', `delay-${index + 1}`);
+         });
+         
+         // Fade in large heart at 2.5s
+         const largeHeart = document.querySelector('.heart-large');
+            console.log('Large heart element:', largeHeart); // Should show the img element
+   
+               if (largeHeart) {
+                  largeHeart.classList.add('show');
                } else {
-                  setTimeout(makeNameArrowGreenAndBlink, 500);
-               }
+                  console.error('Large heart not found!');
             }
-
-            function makeNameArrowGreenAndBlink() {
-               const textWithoutCursor = nameText.slice(0, -1);
-               const lastArrow = nameText.slice(-1);
-               nameDropElement.innerHTML = textWithoutCursor + '<span class="green-arrow blink-arrow">' + lastArrow + '</span>';
-
-               // After 3 blinks (1.5s), move to corner
-               setTimeout(() => {
-                  nameDropElement.classList.add('move-to-corner');
-
-                  // After move animation completes, replace with logo
-                  setTimeout(() => {
-                     console.log('Hiding name-drop');
-                     nameDropElement.classList.add('hidden');
-                     showLogo();
-                  }, 1000);
-               }, 1500);
-            }
-
-            typeNameLetter();
-         }
-
-         // Phase 3: Show logo
-         function showLogo() {
-            const logoContainer = document.getElementById('logo-container');
-
-            // Force browser to recognize the initial state before animating
-            logoContainer.offsetHeight; // Trigger reflow
-
-            // Show it
-            logoContainer.classList.add('show');
-
-            // Show h1 with css slide
-            setTimeout(() => {
-               requestAnimationFrame(() => {
-                  const h1Element = document.getElementById('h1-animation');
-                  h1Element.innerHTML = "Web Design for Creatives and Local Businesses";
-                  h1Element.classList.add('show');
-                  animationCompleted = true;
-               });
-            }, 1500);
-         }
-
-
-         // Start the animation
-         typeNextLetter();
+         
+         // After large heart fully appears (2.5s animation start + 0.8s fade = 3.3s total)
+         // Trigger next animation sequence
+         setTimeout(() => {
+            showLandingIntro();
+         }, 3300);
       }
-   </script>
+
+      function showLandingIntro() {
+         const landingIntro = document.querySelector('.landing-intro');
+         landingIntro.classList.add('show');
+         
+         // After landing-intro completes (600ms based on your CSS)
+         setTimeout(() => {
+            showLandingThanks();
+         }, 600);
+      }
+
+      function showLandingThanks() {
+         const landingThanks = document.querySelector('.landing-thanks');
+         landingThanks.classList.add('show');
+         animationCompleted = true;
+      }
+
+      // Track animation completion
+      let animationCompleted = false;
+   }
+</script>
 </body>
 
 </html>
