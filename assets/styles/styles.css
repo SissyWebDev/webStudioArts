@@ -1,14 +1,16 @@
 :root {
 	--background-color: #454545;
-	--box-color: rgb(26, 26, 35);
-	--border-color: rgb(106, 106, 110);
+	--box-color: #1a1a23;
+	--alt-box-color: #a1a1a6;
+	--border-color: #6a6a6e;
+	--primary-text: #DDDCE5;
 	--decorative-font: Chakra Petch, Space Mono, monospace;
 	--heading-font: Lexend, Outfit, sans serif;
 	--body-font: Inter, Opens Sans, sans serif;
-	--primary-text: #DDDCE5;
+	--alt-heading-font: Archivo, sans-serif;
 }
 
-header {
+header.landing-header {
 	background: linear-gradient(rgba(26, 26, 35, 0.75), rgba(26, 26, 35, 0.75)),
 		url("../../assets/images/MarbleBackGround.png") no-repeat center center fixed;
 	background-size: cover;
@@ -21,21 +23,7 @@ header {
 	position: relative;
 }
 
-header::after {
-    content: '';
-    position: absolute;
-    top: 90vh;
-    left: 0;
-    width: 100%;
-    height: 200px;
-    background: 
-        /* The swoosh curve - ONE graceful arc */
-        radial-gradient(ellipse 70% 150px at 50% -50px, transparent 100%, #a4a3bd 100%);
-    z-index: 10;
-    pointer-events: none;
-}
-
-nav {
+nav.landing-nav {
 	grid-column: 2/4;
 	grid-row: span 3;
 	display: flex;
@@ -44,9 +32,9 @@ nav {
 	align-items: center;
 	overflow: hidden;
 	background: var(--box-color);
-	border-left: 3px solid rgb(221, 220, 229);
-	border-right: 3px solid rgb(221, 220, 229);
-	border-bottom: 3px solid rgb(221, 220, 229);
+	border-left: 3px solid var(--primary-text);
+	border-right: 3px solid var(--primary-text);
+	border-bottom: 3px solid var(--primary-text);
 	will-change: contents;
 	opacity: 0;
 	transform: translateY(-100%);
@@ -54,9 +42,16 @@ nav {
 	margin-top: -24px;
 	/* Pulls nav back to screen top */
 }
-
-nav>* {
-	transition: all 2s ease-out;
+nav.landing-nav ul.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 2rem; /* Space between navigation links */
+  flex: 1;	
 }
 
 nav a {
@@ -80,6 +75,7 @@ nav a:hover {
 	height: 0;
 	overflow: hidden;
 	transition: height 1s ease-out, opacity 1s ease-out;
+	flex-shrink: 0;
 }
 
 #logo-container img {
@@ -91,6 +87,15 @@ nav a:hover {
 	opacity: 1;
 	pointer-events: auto;
 	height: 120px;
+}
+
+.logo-link {
+	margin-top: 24px;
+	transition: transform 0.3s ease-in-out;
+}
+
+.logo-link:hover {
+	transform: scale(.9);
 }
 
 /*Slides in from right*/
@@ -112,11 +117,11 @@ h1.landing {
 	opacity: 0;
 	transform: translateX(100%);
 	transition: transform 0.8s ease-out, opacity 0.8s ease-out;
-	overlfow: hidden;
+	overflow: hidden;
 	background-color: var(--box-color);
-	border-left: 3px solid rgb(221, 220, 229);
-	border-top: 3px solid rgb(221, 220, 229);
-	border-bottom: 3px solid rgb(221, 220, 229);
+	border-left: 3px solid var(--primary-text);
+	border-top: 3px solid var(--primary-text);
+	border-bottom: 3px solid var(--primary-text);
 	padding: 20px 5% 20px 20px;
 	will-change: transform, opacity;
 }
@@ -130,8 +135,6 @@ h1.landing {
 #landing-content {
 	opacity: 0;
 	pointer-events: none;
-	/* height: 0; */
-	/* overflow: hidden; */
 	transform: translateY(100%);
 	transition: transform 0.8s ease-out, opacity 0.8s ease-out;
 	grid-column: 7/12;
@@ -139,10 +142,11 @@ h1.landing {
 	display: flex;
 	flex-direction: column;
 	background: var(--box-color);
-	border-left: 3px solid rgb(221, 220, 229);
-	border-top: 3px solid rgb(221, 220, 229);
-	border-right: 3px solid rgb(221, 220, 229);
-	justify-content: space-around;
+	border-left: 3px solid var(--primary-text);
+	border-top: 3px solid var(--primary-text);
+	border-right: 3px solid var(--primary-text);
+	justify-content: space-evenly;
+	text-align: justify;
 	padding: 0 24px 1em 24px;
 	will-change: transform, opacity;
 }
@@ -160,115 +164,144 @@ h2.landing {
 	font-weight: lighter;
 	font-size: 3em;
 }
+
 /*************************************************/
 /*****Animations classes for Matrix Heart Rain****/
 /*************************************************/
 .heart-animation-container {
-   display: inline-block;
-   position: relative;
-   width: 2em; /* Adjust based on your h2 font-size */
-   height: 1.2em; /* Height to match line-height */
-   vertical-align: middle;
-   margin: 0 0.3em; /* Spacing between text */
+	display: inline-block;
+	position: relative;
+	width: 2em;
+	/* Adjust based on your h2 font-size */
+	height: 1.2em;
+	/* Height to match line-height */
+	vertical-align: middle;
+	margin: 0 0.3em;
+	/* Spacing between text */
 }
 
 /* Rain Column Positioning */
 .heart-column {
-   position: absolute;
-   width: 0.4em;
-   height: 0.4em;
-   opacity: 0;
+	position: absolute;
+	width: 0.4em;
+	height: 0.4em;
+	opacity: 0;
 }
 
 /* Horizontal positions */
-.l10 { left: 10%; }
-.l50 { left: 50%; transform: translateX(-50%); } /* Center align */
-.l90 { left: 90%; transform: translateX(-100%); } /* Right align */
+.l10 {
+	left: 10%;
+}
+
+.l50 {
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+/* Center align */
+.l90 {
+	left: 90%;
+	transform: translateX(-100%);
+}
+
+/* Right align */
 
 /* Starting positions (above container) */
-.t1 { top: -0.5em; }
-.t2 { top: -0.5em; }
-.t3 { top: -0.5em; }
+.t1 {
+	top: -0.5em;
+}
+
+.t2 {
+	top: -0.5em;
+}
+
+.t3 {
+	top: -0.5em;
+}
 
 /* Small falling hearts */
 .heart-small {
-   width: 0.4em;
-   height: 0.4em;
-   display: block;
-   filter: drop-shadow(0 0 2px rgba(0, 255, 0, 0.8)) brightness(1.2);
+	width: 0.4em;
+	height: 0.4em;
+	display: block;
+	filter: drop-shadow(0 0 2px rgba(0, 255, 0, 0.8)) brightness(1.2);
 }
 
 /* Large static heart */
 .heart-large {
-   position: absolute;
-   width: 3em;
-   height: 3em;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-   opacity: 0;
-   filter: drop-shadow(0 0 4px rgba(0, 255, 0, 0.6));
+	position: absolute;
+	width: 3em;
+	height: 3em;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	opacity: 0;
+	filter: drop-shadow(0 0 4px rgba(0, 255, 0, 0.6));
 }
 
 /* Animation States - Added via JS */
 .heart-column.animate {
-   animation: heart-fall 3s ease-in forwards,
-              heart-spin 1s linear infinite;
+	animation: heart-fall 3s ease-in forwards,
+		heart-spin 1s linear infinite;
 }
 
 .heart-column.animate.delay-1 {
-   animation-delay: 0s;
+	animation-delay: 0s;
 }
 
 .heart-column.animate.delay-2 {
-   animation-delay: 0.3s;
+	animation-delay: 0.3s;
 }
 
 .heart-column.animate.delay-3 {
-   animation-delay: 0.6s;
+	animation-delay: 0.6s;
 }
 
 .heart-large.show {
-   animation: heart-fade-in 0.8s ease-out 2.5s forwards;
+	animation: heart-fade-in 0.8s ease-out 2.5s forwards;
 }
 
 /* Keyframe Animations */
 @keyframes heart-fall {
-   0% {
-      top: -0.5em;
-      opacity: 0;
-   }
-   5% {
-      opacity: 1;
-   }
-   85% {
-      opacity: 1;
-   }
-   100% {
-      top: calc(100% + 2em);
-      opacity: 0;
-   }
+	0% {
+		top: -0.5em;
+		opacity: 0;
+	}
+
+	5% {
+		opacity: 1;
+	}
+
+	85% {
+		opacity: 1;
+	}
+
+	100% {
+		top: calc(100% + 2em);
+		opacity: 0;
+	}
 }
 
 @keyframes heart-spin {
-   to {
-      transform: rotateY(180deg);
-   }
+	to {
+		transform: rotateY(180deg);
+	}
 }
 
 @keyframes heart-fade-in {
-   from {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0.8);
-   }
-   to {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-   }
+	from {
+		opacity: 0;
+		transform: translate(-50%, -50%) scale(0.8);
+	}
+
+	to {
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
+	}
 }
 
 /*************************************************/
-/***************End of Heart Animation************/
+/*************** Landing-Info-Box ****************/
 /*************************************************/
 
 
@@ -279,6 +312,12 @@ h2.landing {
 	font-size: 1.5em;
 }
 
+/*Forces visual break so "Pacific Northwest" always starts new line*/
+.break-here::after {
+    content: "\A";
+    white-space: pre;
+}
+
 .landing-thanks {
 	font-family: var(--heading-font);
 	color: var(--primary-text);
@@ -287,15 +326,16 @@ h2.landing {
 
 .landing-intro,
 .landing-thanks {
-    opacity: 0;
-    transform: translateY(20px); /* Starting position for slide-up */
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+	opacity: 0;
+	transform: translateY(20px);
+	/* Starting position for slide-up */
+	transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 .landing-intro.show,
 .landing-thanks.show {
-    opacity: 1;
-    transform: translateY(0);
+	opacity: 1;
+	transform: translateY(0);
 }
 
 @keyframes slideInNav {
@@ -309,36 +349,285 @@ h2.landing {
 	opacity: 0 !important;
 	pointer-events: none;
 }
+
 /*************************************************/
-/***************** About Page ********************/
+/*************** Universal Pages Styles **********/
 /*************************************************/
-main {
-	height: 100dvh;
-}
-.about {
-	min-height: 100vh;
-	background: linear-gradient(rgba(26, 26, 35, 0.75), rgba(26, 26, 35, 0.75)),
+
+body.pages-body {
+	background: linear-gradient(rgb(26, 26, 35, 0.75), rgba(26, 26, 35, 0.75)),
 		url("../../assets/images/MarbleBackGround.png") no-repeat center center fixed;
 	background-size: cover;
 	display: grid;
 	grid-template-columns: repeat(12, 1fr);
-	grid-template-rows: repeat(4, 1fr);
-	gap: 24px;
-	padding-top: 24px;
+	grid-template-rows: auto 1fr auto;
+	gap: 12px;
+	min-height: 100vh;
+	position: relative;
 }
-.about-h1 {
-	grid-column: 2/11;
+
+header.pages-header {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-template-rows: auto auto;
+	gap: 0; /*No gap between nav bars*/
+	grid-column: 1/-1;
 	grid-row: 1;
+	align-self: start;
 }
-.history {
-	grid-column: 2/6;
+
+.pages-logo-link {
+	
+}
+
+.pages-logo-container {
+	position: fixed;
+	top: 2vw;
+	left: 1vw;
+	z-index: 100;
+	animation: slideInFromTop 0.6s ease-out;
+	transition: transform 0.5s ease-in-out;
+}
+
+.pages-logo-container:hover {
+	transform: scale(.9);
+}
+
+nav.pages-nav {
+	grid-column: 3/11;
+	grid-row: 1;
+	background: var(--box-color);
+	border-left: 3px solid var(--primary-text);
+	border-right: 3px solid var(--primary-text);
+	border-bottom: 3px solid var(--primary-text);
+	height: fit-content;
+	padding: 1vh 0;
+	animation: slideInFromTop 0.6s ease-out 0.6s backwards;
+	z-index: 100;
+}
+
+nav.pages-nav ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: space-around;
+}
+
+nav.pages-secondary-nav {
+	grid-column: 4/10;
 	grid-row: 2;
+	background: var(--box-color);
+	border-left: 3px solid var(--primary-text);
+	border-right: 3px solid var(--primary-text);
+	border-bottom: 3px solid var(--primary-text);
+	height: fit-content;
+	padding: 1vh 0;
+	/* Drops down after main nav, with delay */
+	animation: slideInFromTop 0.5s ease-out 0.9s backwards;
 }
-.philosophy {
-	grid-column: 3/7;
+nav.pages-secondary-nav a {
+	font-size: calc(1em + 1vh);
+}
+
+nav.pages-secondary-nav ul {
+	display: flex;
+    flex-direction: row;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: space-around;
+}
+
+footer {
+	grid-column: 1/13;
 	grid-row: 3;
+	display: flex;
+	justify-content: space-between;
+	background: var(--box-color);
+	border-top: 3px solid var(--primary-text);
+	height: fit-content;
+	padding: 1em 3em;
+	color: var(--primary-text);
+	font-family: var(--body-font);
+	align-items: center;
+	animation: upFromBottom 0.6s ease-in backwards;
+	animation-delay: 1.4s;
 }
-.fun-facts {
-	grid-column: 4/9;
+
+.footer-title {
+	font-family: var(--heading-font);
+	font-size: larger;
+}
+
+address {
+	font-style: normal;
+}
+footer h3 {
+	font-size: calc(1em + 1vw);
+	font-style: italic;
+}
+
+nav.footer-nav a {
+	font-size: calc(.75em + 1vh);
+}
+
+/*********************************************/
+/******************* Digital******************/
+/*********************************************/
+
+main.main-digimedi {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-auto-rows: auto;
+	gap: 24px;
+	grid-column: 1/13;
+	line-height: 1;
+	margin-top: 5%;
+	font-size: clamp(4rem, 7vw, 16rem);
+}
+
+h1#digimedi-h1 {
+	grid-column: 1/12;
+	grid-row: 1;
+	align-items: center;
+	font-family: var(--heading-font);
+	/* font-size: clamp(4rem, 7vw, 16rem); */
+	color: var(--primary-text);
+	text-align: right;
+	/* overflow: hidden; */
+	/* background-color: var(--box-color); */
+	/* border-right: 3px solid var(--primary-text); */
+	/* border-top: 3px solid var(--primary-text); */
+	/* border-bottom: 3px solid var(--primary-text); */
+	/* padding: 20px 20px 30px 5%; */
+	/* will-change: transform, opacity; */
+}
+
+.portfolio-section {
+	font-family: var(--heading-font);
+	/* font-size: clamp(4rem, 7vw, 16rem); */
+	color: var(--primary-text);
+}
+
+#web-based {
+	grid-column:1/13;
+	grid-row: 2;
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	grid-auto-rows: 200px;
+	gap: 24px;
+}
+
+	#web-based h2 {
+		grid-column: 3/-1;
+		grid-row: 1;
+	}
+
+#graphics {
+	grid-column:1/13;
+	grid-row: 3;
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	grid-auto-rows: 200px;
+	gap: 24px;
+}
+
+	#graphics h2 {
+		grid-column: 1/9;
+		grid-row: 1;
+	}
+
+#digital-art {
+	grid-column:1/13;
 	grid-row: 4;
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	grid-auto-rows: 200px;
+	gap: 24px;
 }
+
+	#digital-art h2 {
+		grid-column: 3/-1;
+		grid-row: 1;
+	}
+
+
+
+/*********************************************/
+/******************* About *******************/
+/*********************************************/
+
+main.main-about {
+	height: auto;
+	grid-column: 2/12;
+	grid-row: 2/3;
+	display: flex;
+	flex-direction: column;
+	gap: 1.5em;
+	justify-content: center;
+	font-family: var(--body-font);
+	opacity: 0;
+	animation: fadeIn 0.6s ease-in forwards;
+	animation-delay: 0.9s;
+}
+
+.section-about {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	gap:  1em;
+	background: var(--box-color);
+	color: var(--primary-text);
+	border-top: 3px solid var(--primary-text);
+	border-left: 3px solid var(--primary-text);
+	border-right: 3px solid var(--primary-text);
+	border-bottom: 3px solid var(--primary-text);
+	padding: 2em;
+}
+
+.section-about p {
+	font-size: large;
+}
+
+/*********************************************/
+/******************* Contact******************/
+/*********************************************/
+
+/*********************************************/
+/***************** Animation *****************/
+/*********************************************/
+
+@keyframes slideInFromTop {
+	from {
+		transform: translateY(-100%);
+		opacity: 0;
+	}
+
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}@keyframes upFromBottom {
+	from {
+		transform: translateY(100%);
+		opacity: 0;
+	}
+
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
