@@ -8,54 +8,209 @@
 	--heading-font: Lexend, Outfit, sans serif;
 	--body-font: Inter, Opens Sans, sans serif;
 	--alt-heading-font: Archivo, sans-serif;
+	font-size: 16px;
 }
 
-header.landing-header {
+/**************************************************************/
+/*********** Essential Elements of  ***************************/
+/**********  PRIMARY LANDING PAGE SECTIONS ********************/
+/***************** Begining w/ Mobile-First *******************/
+/**************************************************************/
+
+/************************* Base Styles ************************/
+
+body.landing-body {
 	background: linear-gradient(rgba(26, 26, 35, 0.75), rgba(26, 26, 35, 0.75)),
 		url("../../assets/images/MarbleBackGround.png") no-repeat center center fixed;
 	background-size: cover;
-	display: grid;
-	grid-template-columns: repeat(12, 1fr);
-	grid-template-rows: repeat(4, 1fr);
-	gap: 24px;
-	padding-top: 24px;
-	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	gap: 2em;
+	padding-top: 12px;
+	min-height: 100dvh;
 	position: relative;
 }
 
-nav.landing-nav {
-	grid-column: 2/4;
-	grid-row: span 3;
+header.landing-header {
+	width: 95vw;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-evenly;
-	align-items: center;
-	overflow: hidden;
-	background: var(--box-color);
-	border-left: 3px solid var(--primary-text);
-	border-right: 3px solid var(--primary-text);
-	border-bottom: 3px solid var(--primary-text);
-	will-change: contents;
-	opacity: 0;
-	transform: translateY(-100%);
-	animation: slideInNav 1s ease-out forwards;
-	margin-top: -24px;
-	/* Pulls nav back to screen top */
-}
-nav.landing-nav ul.nav-links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  gap: 2rem; /* Space between navigation links */
-  flex: 1;	
 }
 
+nav.landing-nav {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	background: var(--box-color);
+	border-top: 3px solid var(--primary-text);
+	border-right: 3px solid var(--primary-text);
+	border-bottom: 3px solid var(--primary-text);
+	padding: 1rem;
+	opacity: 0;
+	transform: translateX(-100%);
+	animation: slideInNav 1s ease-out forwards;
+	will-change: transform, opacity;
+}
+
+@keyframes slideInNav {
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+nav.landing-nav ul.nav-links {
+	list-style: none;
+	padding: .75rem;
+	margin: 0;
+	display: flex;
+	flex-direction: row;
+	gap: 1.5rem;
+	align-items: center;
+}
+
+#logo-container {
+	opacity: 0;
+	pointer-events: none;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	transition: width 1s ease-out, opacity 1s ease-out;
+	flex-shrink: 0;
+}
+
+#logo-container img {
+	height: 80px;
+	width: auto;
+}
+
+
+#logo-container.show {
+	opacity: 1;
+	pointer-events: auto;
+	width: 80px;
+	height: 80px;
+}
+
+.logo-link {
+	transition: transform 0.3s ease-in-out;
+}
+
+main.landing-main {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+/*Slides in from right*/
+
+h1.landing {
+	font-family: var(--heading-font);
+	color: var(--primary-text);
+	line-height: 1.2;
+	text-align: center;
+}
+
+#h1-animation {
+	opacity: 0;
+	transform: translateX(100%);
+	transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+	background-color: var(--box-color);
+	border-left: 3px solid var(--primary-text);
+	border-top: 3px solid var(--primary-text);
+	border-bottom: 3px solid var(--primary-text);
+	margin: 0 0 0 auto;
+	padding: 1rem;
+	width: 95vw;
+	will-change: transform, opacity;
+}
+
+#h1-animation.show {
+	opacity: 1;
+	transform: translateX(0);
+}
+
+/*Slides up from bottom*/
+
+#landing-content {
+	opacity: 0;
+	transform: translateY(100%);
+	transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	background: var(
+	--box-color);
+	border-left: 3px solid var(
+	--primary-text);
+	border-top: 3px solid var(
+	--primary-text);
+	border-right: 3px solid var(
+	--primary-text);
+	text-align: center;
+	will-change: transform, opacity;
+	width: 80vw;
+	margin: auto auto 0 auto;
+}
+
+#landing-content.show {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/*Inside landing-content*/
+
+h2.landing {
+	font-family: var(--decorative-font);
+	color: var(--primary-text);
+	font-weight: lighter;
+	line-height: 1.3;
+}
+
+.landing-intro {
+	font-family: var(--body-font);
+	letter-spacing: 0.015em;
+	color: var(--primary-text);
+	font-size: 1rem;
+}
+
+.landing-thanks {
+	font-family: var(--heading-font);
+	color: var(--primary-text);
+	font-size: 1.125rem;
+}
+
+/***********************************************/
+/***** Media Queries for Mobile Heights ********/
+/***********************************************/
+
+@media (width <= 575px) and (height <= 740px) {
+	#landing-content {
+	    padding: 1rem 1rem 10vh 1rem;
+	}
+}
+
+@media (width <= 575px) and (741px <= height <= 1000px) {
+	#h1-animation {
+		margin: 3rem 0 0 auto;
+	}
+	#landing-content {
+		padding: 3rem 1rem 17vh 1rem;
+		gap: 3rem;
+	}
+
+	#landing-content > p {
+		margin-top: 3rem;
+	}
+}
+/***********************************************/
+/**** Exceptions: Associated LANDING Styles ****/
+/**** Not Needing Adjustment w/Viewport ********/
+/***********************************************/
 nav a {
-	font-size: calc(1.5em + 1vh);
+	font-size: 1.2rem;
 	font-family: var(--heading-font);
 	color: var(--primary-text);
 	text-decoration: none;
@@ -69,124 +224,86 @@ nav a:hover {
 	transition: all 1s ease-out;
 }
 
-#logo-container {
-	opacity: 0;
-	pointer-events: none;
-	height: 0;
-	overflow: hidden;
-	transition: height 1s ease-out, opacity 1s ease-out;
-	flex-shrink: 0;
-}
-
-#logo-container img {
-	height: 120px;
-	width: auto;
-}
-
-#logo-container.show {
-	opacity: 1;
-	pointer-events: auto;
-	height: 120px;
-}
-
-.logo-link {
-	margin-top: 24px;
-	transition: transform 0.3s ease-in-out;
-}
-
 .logo-link:hover {
 	transform: scale(.9);
 }
 
-/*Slides in from right*/
-h1.landing {
-	font-family: var(--heading-font);
-	color: var(--primary-text);
-	grid-column: 5/-1;
-	grid-row: 1;
-	display: flex;
-	font-size: clamp(2rem, 4vw, 12rem);
-	/* scales based on viewport width */
-	line-height: 1.1;
-	align-items: center;
-	justify-content: flex-end;
-	text-align: right;
-}
-
-#h1-animation {
-	opacity: 0;
-	transform: translateX(100%);
-	transition: transform 0.8s ease-out, opacity 0.8s ease-out;
-	overflow: hidden;
-	background-color: var(--box-color);
-	border-left: 3px solid var(--primary-text);
-	border-top: 3px solid var(--primary-text);
-	border-bottom: 3px solid var(--primary-text);
-	padding: 20px 5% 20px 20px;
-	will-change: transform, opacity;
-}
-
-#h1-animation.show {
-	opacity: 1;
-	transform: translateX(0);
-}
-
-/*Slides up from bottom*/
-#landing-content {
-	opacity: 0;
-	pointer-events: none;
-	transform: translateY(100%);
-	transition: transform 0.8s ease-out, opacity 0.8s ease-out;
-	grid-column: 7/12;
-	grid-row: 3/ span 5;
-	display: flex;
-	flex-direction: column;
-	background: var(--box-color);
-	border-left: 3px solid var(--primary-text);
-	border-top: 3px solid var(--primary-text);
-	border-right: 3px solid var(--primary-text);
-	justify-content: space-evenly;
-	text-align: justify;
-	padding: 0 24px 1em 24px;
-	will-change: transform, opacity;
-}
-
-#landing-content.show {
-	opacity: 1;
+main.landing-main > * {
 	pointer-events: auto;
+}
+
+/*************** Landing-Info-Box ****************/
+
+.landing-intro,
+.landing-thanks {
+	opacity: 0;
+	transform: translateY(20px);
+	/* Starting position for slide-up */
+	transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.landing-intro.show,
+.landing-thanks.show {
+	opacity: 1;
 	transform: translateY(0);
 }
 
-/*Inside landing-content*/
-h2.landing {
-	font-family: var(--decorative-font);
-	color: var(--primary-text);
-	font-weight: lighter;
-	font-size: 3em;
+.hidden {
+	opacity: 0 !important;
+	pointer-events: none;
 }
 
-/*************************************************/
-/*****Animations classes for Matrix Heart Rain****/
-/*************************************************/
+/********************************************/
+/*************** End: Exceptions*************/
+/********************************************/
+
+
+/****************************************************/
+/****** Essential Elements of HEART ANIMATIONS ******/
+/***** For Styling Across Viewport Breakpoints ******/
+/****************************************************/
+
 .heart-animation-container {
 	display: inline-block;
 	position: relative;
-	width: 2em;
-	/* Adjust based on your h2 font-size */
-	height: 1.2em;
-	/* Height to match line-height */
+	width: 1.5em;
+	height: 1em;
 	vertical-align: middle;
-	margin: 0 0.3em;
-	/* Spacing between text */
+	margin: 0 0.2em;
 }
 
 /* Rain Column Positioning */
+
 .heart-column {
 	position: absolute;
-	width: 0.4em;
-	height: 0.4em;
+	width: 0.3em;
+	height: 0.3em;
 	opacity: 0;
 }
+
+/* Small falling hearts */
+.heart-small {
+	width: 0.3em;
+	height: 0.3em;
+	display: block;
+	filter: drop-shadow(0 0 2px rgba(0, 255, 0, 0.8)) brightness(1.2);
+}
+	
+/* Large static heart */
+.heart-large {
+	position: absolute;
+	width: 2em;
+	height: auto;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	opacity: 0;
+	filter: drop-shadow(0 0 4px rgba(0, 255, 0, 0.6));
+}
+/*********************************************/
+/**** Exceptions: Associated HEART Styles ****/
+/**** Do Not Need Adjustment w/Viewport ******/
+/*********************************************/
 
 /* Horizontal positions */
 .l10 {
@@ -204,8 +321,6 @@ h2.landing {
 	transform: translateX(-100%);
 }
 
-/* Right align */
-
 /* Starting positions (above container) */
 .t1 {
 	top: -0.5em;
@@ -217,26 +332,6 @@ h2.landing {
 
 .t3 {
 	top: -0.5em;
-}
-
-/* Small falling hearts */
-.heart-small {
-	width: 0.4em;
-	height: 0.4em;
-	display: block;
-	filter: drop-shadow(0 0 2px rgba(0, 255, 0, 0.8)) brightness(1.2);
-}
-
-/* Large static heart */
-.heart-large {
-	position: absolute;
-	width: 3em;
-	height: 3em;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	opacity: 0;
-	filter: drop-shadow(0 0 4px rgba(0, 255, 0, 0.6));
 }
 
 /* Animation States - Added via JS */
@@ -260,8 +355,9 @@ h2.landing {
 .heart-large.show {
 	animation: heart-fade-in 0.8s ease-out 2.5s forwards;
 }
-
-/* Keyframe Animations */
+/**********************************/
+/****** Keyframe Animations *******/
+/**********************************/
 @keyframes heart-fall {
 	0% {
 		top: -0.5em;
@@ -299,55 +395,225 @@ h2.landing {
 		transform: translate(-50%, -50%) scale(1);
 	}
 }
+/********************************************/
+/*************** End: Exceptions*************/
+/********************************************/
 
 /*************************************************/
-/*************** Landing-Info-Box ****************/
+/*************************************************/
+/******** End: Heart Animation Sequence **********/
+/*************************************************/
 /*************************************************/
 
+@media screen and (min-width: 1467px) {
+	
+	body.landing-body {
+	background: linear-gradient(rgba(26, 26, 35, 0.75), rgba(26, 26, 35, 0.75)),
+		url("../../assets/images/MarbleBackGround.png") no-repeat center center fixed;
+	background-size: cover;
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-template-rows: repeat(4, 1fr);
+	gap: 24px;
+	padding-top: 24px;
+	min-height: 100vh;
+	position: relative;
+	}
 
-.landing-intro {
-	font-family: var(--body-font);
-	letter-spacing: 0.015em;
-	color: var(--primary-text);
-	font-size: 1.5em;
-}
+	header.landing-header {
+		grid-column: 2/4;
+		grid-row: 1 / span 3;
+		margin-top: -24px;
+		display: flex;
+	}
 
-/*Forces visual break so "Pacific Northwest" always starts new line*/
-.break-here::after {
-    content: "\A";
-    white-space: pre;
-}
+	nav.landing-nav {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-evenly;
+		align-items: center;
+		overflow: hidden;
+		background: var(--box-color);
+		border-left: 3px solid var(--primary-text);
+		border-right: 3px solid var(--primary-text);
+		border-bottom: 3px solid var(--primary-text);
+		will-change: contents;
+		opacity: 0;
+		transform: translateY(-100%);
+		animation: slideInNav 1s ease-out forwards;
+		width: 100%;
+		min-height: 100%; 
+		will-change: transform, opacity;
+	}
 
-.landing-thanks {
-	font-family: var(--heading-font);
-	color: var(--primary-text);
-	font-size: 1.5em;
-}
+	nav.landing-nav ul.nav-links {
+	  list-style: none;
+	  padding: 0;
+	  margin: 0;
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: space-evenly;
+	  align-items: center;
+	  gap: 2rem; /* Space between navigation links */
+	  flex: 1;	
+	}
+	
+	nav a {
+		font-size: calc(1.5em + 1vh);
+		font-family: var(--heading-font);
+		color: var(--primary-text);
+		text-decoration: none;
+	}
+	
+	#logo-container {
+		opacity: 0;
+		pointer-events: none;
+		height: 0;
+		overflow: hidden;
+		transition: height 1s ease-out, opacity 1s ease-out;
+		flex-shrink: 0;
+	}
 
-.landing-intro,
-.landing-thanks {
-	opacity: 0;
-	transform: translateY(20px);
-	/* Starting position for slide-up */
-	transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.landing-intro.show,
-.landing-thanks.show {
-	opacity: 1;
-	transform: translateY(0);
-}
-
-@keyframes slideInNav {
-	to {
+	#logo-container img {
+		height: 120px;
+		width: auto;
+	}
+	
+	#logo-container.show {
 		opacity: 1;
+		pointer-events: auto;
+		height: 120px;
+	}
+
+	.logo-link {
+		margin-top: 24px;
+		transition: transform 0.3s ease-in-out;
+	}
+	
+	main.landing-main {
+		grid-column: 1/-1;
+		grid-row: 1/-1;
+		display: grid;
+		grid-template-columns: repeat(12, 1fr);
+		grid-template-rows: repeat(4, 1fr);
+		gap: 24px;
+		pointer-events: none;
+	}
+	
+	h1.landing {
+		font-family: var(--heading-font);
+		color: var(--primary-text);
+		grid-column: 5/-1;
+		grid-row: 1;
+		display: flex;
+		font-size: clamp(2rem, 4vw, 12rem);
+		/* scales based on viewport width */
+		line-height: 1.1;
+		align-items: center;
+		justify-content: flex-end;
+		text-align: right;
+	}
+	
+	#h1-animation {
+		opacity: 0;
+		transform: translateX(100%);
+		transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+		overflow: hidden;
+		background-color: var(--box-color);
+		border-left: 3px solid var(--primary-text);
+		border-top: 3px solid var(--primary-text);
+		border-bottom: 3px solid var(--primary-text);
+		padding: 20px 5% 20px 20px;
+		will-change: transform, opacity;
+	}
+	
+	#h1-animation.show {
+		opacity: 1;
+		transform: translateX(0);
+	}
+	
+	#landing-content {
+	opacity: 0;
+	pointer-events: none;
+	transform: translateY(100%);
+	transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+	grid-column: 7/12;
+	grid-row: 3/ span 5;
+	display: flex;
+	flex-direction: column;
+	background: var(--box-color);
+	border-left: 3px solid var(--primary-text);
+	border-top: 3px solid var(--primary-text);
+	border-right: 3px solid var(--primary-text);
+	justify-content: space-evenly;
+	text-align: justify;
+	padding: 0 24px 1em 24px;
+	will-change: transform, opacity;
+	}
+	
+	#landing-content.show {
+		opacity: 1;
+		pointer-events: auto;
 		transform: translateY(0);
 	}
-}
+	
+	h2.landing {
+		font-family: var(--decorative-font);
+		color: var(--primary-text);
+		font-weight: lighter;
+		font-size: 3em;
+	}
+	
+	.landing-intro {
+		font-family: var(--body-font);
+		letter-spacing: 0.015em;
+		color: var(--primary-text);
+		font-size: 1.5em;
+	}
+	
+	.landing-thanks {
+		font-family: var(--heading-font);
+		color: var(--primary-text);
+		font-size: 1.5em;
+	}
+	
+	.heart-animation-container {
+	display: inline-block;
+	position: relative;
+	width: 2em;
+	/* Adjust based on your h2 font-size */
+	height: 1.2em;
+	/* Height to match line-height */
+	vertical-align: middle;
+	margin: 0 0.3em;
+	/* Spacing between text */
+	}
+	
+	.heart-column {
+	position: absolute;
+	width: 0.4em;
+	height: 0.4em;
+	opacity: 0;
+	}
+	
+	.heart-small {
+	width: 0.4em;
+	height: 0.4em;
+	display: block;
+	filter: drop-shadow(0 0 2px rgba(0, 255, 0, 0.8)) brightness(1.2);
+	}
+	
+	.heart-large {
+		position: absolute;
+		width: auto;
+		height: auto;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		opacity: 0;
+		filter: drop-shadow(0 0 4px rgba(0, 255, 0, 0.6));
+	}
 
-.hidden {
-	opacity: 0 !important;
-	pointer-events: none;
 }
 
 /*************************************************/
@@ -630,4 +896,3 @@ main.main-about {
 		opacity: 1;
 	}
 }
-
