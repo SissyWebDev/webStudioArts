@@ -67,7 +67,7 @@ nav.landing-nav ul.nav-links {
 	display: flex;
 	flex-direction: row;
 	gap: 1.5rem;
-	align-items: center;
+	font-size: 1.15rem;
 }
 
 #logo-container {
@@ -111,6 +111,21 @@ h1.landing {
 	color: var(--primary-text);
 	line-height: 1.2;
 	text-align: center;
+	margin: 0 0 0 auto;
+	padding: .5rem;
+}
+
+.break1 {
+	display: inline;
+}
+.break1-5 {
+	display: none;
+}
+.break2 {
+	display: none;
+}
+.break3 {
+	display: inline;
 }
 
 #h1-animation {
@@ -121,8 +136,6 @@ h1.landing {
 	border-left: 3px solid var(--primary-text);
 	border-top: 3px solid var(--primary-text);
 	border-bottom: 3px solid var(--primary-text);
-	margin: 0 0 0 auto;
-	padding: 1rem;
 	width: 95vw;
 	will-change: transform, opacity;
 }
@@ -153,6 +166,8 @@ h1.landing {
 	will-change: transform, opacity;
 	width: 80vw;
 	margin: auto auto 0 auto;
+	min-height: 66vh;
+	max-width: 800px;
 }
 
 #landing-content.show {
@@ -205,12 +220,242 @@ h2.landing {
 		margin-top: 3rem;
 	}
 }
+
+/***********************************************/
+/******** Media Queries for iPads/Tablets ******/
+/***********************************************/
+
+@media (768px <= width <= 1024px) and (1024px <= height <= 1366px) {
+	
+  nav.landing-nav {
+	justify-content: space-evenly;
+	}
+	
+  nav.landing-nav ul.nav-links {
+	  gap: 0;
+	  width: 80%;
+	  justify-content: space-evenly;
+	  font-size: 2rem;
+	 }
+	
+	#h1-animation {
+		font-size: 3rem;
+		margin-top: auto;
+		padding: 1rem;
+	}
+
+	.break2 {
+		display: inline;
+	}
+
+	.break3 {
+		display: none;
+	}
+	
+	#landing-content {
+		justify-content: space-around;
+		padding: 0 2rem;
+	}
+
+	h2.landing {
+		font-size: 2.5rem;
+	}
+
+	.landing-intro, .landing-thanks {
+		font-size: 1.5rem;
+	}
+}
+
+/***********************************************/
+/*********** Small Screens: 576px+ *************/
+/***********************************************/
+
+@media (min-width: 576px) {
+	nav.landing-nav {
+		justify-content: space-around;
+	}
+
+	nav.landing-nav ul.nav-links {
+		width: 100%;
+		justify-content: space-evenly;
+		font-size: 1.5rem
+	}
+
+	#landing-content {
+		justify-content: space-around;
+		padding: 0 2rem;
+		gap: 0;
+	}
+
+	h2.landing {
+		font-size: 2.5rem;
+	}
+	.landing-intro, .landing-thanks {
+		font-size: 1.5rem;
+	}
+}
+
+/***********************************************/
+/*********** Medium Screens: 768px+ ************/
+/***********************************************/
+
+@media (min-width: 768px){
+	
+	body.landing-body {
+		background: linear-gradient(rgba(26, 26, 35, 0.75), rgba(26, 26, 35, 0.75)),
+			url("../../assets/images/MarbleBackGround.png") no-repeat center center fixed;
+		background-size: cover;
+		display: grid;
+		grid-template-columns: repeat(12, minmax(0, 1fr));
+		grid-template-rows: repeat(4, minmax(0, 1fr));
+		gap: 24px;
+		padding-top: 24px;
+		height: 100vh;
+		position: relative;
+	}
+
+	header.landing-header {
+		grid-column: 2/4;
+		grid-row: 1 / span 3;
+		margin-top: -24px;
+		display: flex;
+		width: auto;
+		justify-content: space-evenly;
+	}
+
+	nav.landing-nav {
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+		background: var(--box-color);
+		border-top:  0;
+		border-left: 3px solid var(--primary-text);
+		border-right: 3px solid var(--primary-text);
+		border-bottom: 3px solid var(--primary-text);
+		will-change: contents;
+		opacity: 0;
+		transform: translateY(-100%);
+		animation: slideInNav 1s ease-out forwards;
+		width: 100%;
+		min-height: 100%;
+		will-change: transform, opacity;
+		padding: 0;
+		align-items: center;
+	}
+
+	nav.landing-nav ul.nav-links {
+		flex-direction: column;
+		align-items: center;
+		height: 100%;
+		justify-content: space-around;
+	}
+
+	.logo-link {
+		padding-top: 2em;
+	}
+
+	main.landing-main {
+		grid-column: 1/-1;
+		grid-row: 1/-1;
+		display: grid;
+		grid-template-columns: repeat(12, minmax(0, 1fr));
+		grid-template-rows: repeat(8, minmax(0, 1fr));
+		pointer-events: none;
+	}
+
+	h1.landing {
+		grid-column: span 8/-1;
+		grid-row: 2/span 2;
+		display: flex;
+		font-size: 3rem;
+		line-height: 1.1;
+		align-items: center;
+		text-align: left;
+		padding-top: 1rem;
+		padding-right: 1rem;
+		padding-bottom: 1rem;
+		padding-left: clamp(1rem, 0rem + 3vw, 3rem);
+		margin: 0;
+	}
+
+	.break2 {
+		display: inline;
+	}
+
+	.break3 {
+		display: none;
+	}
+	#h1-animation {
+		width: auto
+	}
+
+	#landing-content {
+		opacity: 0;
+		pointer-events: none;
+		transform: translateY(100%);
+		transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+		grid-column: 6/span 6;
+		grid-row: 4/ span 5;
+		display: flex;
+		flex-direction: column;
+		background: var(--box-color);
+		border-left: 3px solid var(--primary-text);
+		border-top: 3px solid var(--primary-text);
+		border-right: 3px solid var(--primary-text);
+		justify-content: space-evenly;
+		text-align: justify;
+		padding: 0 2rem;
+		margin: 2rem 0 0 0;
+		will-change: transform, opacity;
+		width:  auto;
+		min-height: auto;
+	}
+
+	h2.landing {
+		font-size: 2rem;
+		text-align: center;
+	}
+
+	    .landing-intro, .landing-thanks {
+			font-size: 1.25rem;
+			text-align:  center;
+		}
+}
+
+@media (min-width: 992px) {
+	break
+}
+
+@media (min-width: 1200px) {
+	h1.landing {
+		justify-content: left;
+		padding-left: 2rem;
+		font-size: 3rem;
+		/*font-size: clamp(3rem, 3rem + 1vh, 6rem);*/
+	}
+
+	.break1 {
+		display: none;
+	}
+
+	.break1-5 {
+		display: inline;
+	}
+
+	.break2 {
+		display: none;
+	}
+
+	.break3 {
+		display: none;
+	}
+}
+
 /***********************************************/
 /**** Exceptions: Associated LANDING Styles ****/
 /**** Not Needing Adjustment w/Viewport ********/
 /***********************************************/
 nav a {
-	font-size: 1.2rem;
 	font-family: var(--heading-font);
 	color: var(--primary-text);
 	text-decoration: none;
@@ -405,219 +650,11 @@ main.landing-main > * {
 /*************************************************/
 /*************************************************/
 
-@media screen and (min-width: 1467px) {
-	
-	body.landing-body {
-	background: linear-gradient(rgba(26, 26, 35, 0.75), rgba(26, 26, 35, 0.75)),
-		url("../../assets/images/MarbleBackGround.png") no-repeat center center fixed;
-	background-size: cover;
-	display: grid;
-	grid-template-columns: repeat(12, 1fr);
-	grid-template-rows: repeat(4, 1fr);
-	gap: 24px;
-	padding-top: 24px;
-	min-height: 100vh;
-	position: relative;
-	}
-
-	header.landing-header {
-		grid-column: 2/4;
-		grid-row: 1 / span 3;
-		margin-top: -24px;
-		display: flex;
-	}
-
-	nav.landing-nav {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-evenly;
-		align-items: center;
-		overflow: hidden;
-		background: var(--box-color);
-		border-left: 3px solid var(--primary-text);
-		border-right: 3px solid var(--primary-text);
-		border-bottom: 3px solid var(--primary-text);
-		will-change: contents;
-		opacity: 0;
-		transform: translateY(-100%);
-		animation: slideInNav 1s ease-out forwards;
-		width: 100%;
-		min-height: 100%; 
-		will-change: transform, opacity;
-	}
-
-	nav.landing-nav ul.nav-links {
-	  list-style: none;
-	  padding: 0;
-	  margin: 0;
-	  display: flex;
-	  flex-direction: column;
-	  justify-content: space-evenly;
-	  align-items: center;
-	  gap: 2rem; /* Space between navigation links */
-	  flex: 1;	
-	}
-	
-	nav a {
-		font-size: calc(1.5em + 1vh);
-		font-family: var(--heading-font);
-		color: var(--primary-text);
-		text-decoration: none;
-	}
-	
-	#logo-container {
-		opacity: 0;
-		pointer-events: none;
-		height: 0;
-		overflow: hidden;
-		transition: height 1s ease-out, opacity 1s ease-out;
-		flex-shrink: 0;
-	}
-
-	#logo-container img {
-		height: 120px;
-		width: auto;
-	}
-	
-	#logo-container.show {
-		opacity: 1;
-		pointer-events: auto;
-		height: 120px;
-	}
-
-	.logo-link {
-		margin-top: 24px;
-		transition: transform 0.3s ease-in-out;
-	}
-	
-	main.landing-main {
-		grid-column: 1/-1;
-		grid-row: 1/-1;
-		display: grid;
-		grid-template-columns: repeat(12, 1fr);
-		grid-template-rows: repeat(4, 1fr);
-		gap: 24px;
-		pointer-events: none;
-	}
-	
-	h1.landing {
-		font-family: var(--heading-font);
-		color: var(--primary-text);
-		grid-column: 5/-1;
-		grid-row: 1;
-		display: flex;
-		font-size: clamp(2rem, 4vw, 12rem);
-		/* scales based on viewport width */
-		line-height: 1.1;
-		align-items: center;
-		justify-content: flex-end;
-		text-align: right;
-	}
-	
-	#h1-animation {
-		opacity: 0;
-		transform: translateX(100%);
-		transition: transform 0.8s ease-out, opacity 0.8s ease-out;
-		overflow: hidden;
-		background-color: var(--box-color);
-		border-left: 3px solid var(--primary-text);
-		border-top: 3px solid var(--primary-text);
-		border-bottom: 3px solid var(--primary-text);
-		padding: 20px 5% 20px 20px;
-		will-change: transform, opacity;
-	}
-	
-	#h1-animation.show {
-		opacity: 1;
-		transform: translateX(0);
-	}
-	
-	#landing-content {
-	opacity: 0;
-	pointer-events: none;
-	transform: translateY(100%);
-	transition: transform 0.8s ease-out, opacity 0.8s ease-out;
-	grid-column: 7/12;
-	grid-row: 3/ span 5;
-	display: flex;
-	flex-direction: column;
-	background: var(--box-color);
-	border-left: 3px solid var(--primary-text);
-	border-top: 3px solid var(--primary-text);
-	border-right: 3px solid var(--primary-text);
-	justify-content: space-evenly;
-	text-align: justify;
-	padding: 0 24px 1em 24px;
-	will-change: transform, opacity;
-	}
-	
-	#landing-content.show {
-		opacity: 1;
-		pointer-events: auto;
-		transform: translateY(0);
-	}
-	
-	h2.landing {
-		font-family: var(--decorative-font);
-		color: var(--primary-text);
-		font-weight: lighter;
-		font-size: 3em;
-	}
-	
-	.landing-intro {
-		font-family: var(--body-font);
-		letter-spacing: 0.015em;
-		color: var(--primary-text);
-		font-size: 1.5em;
-	}
-	
-	.landing-thanks {
-		font-family: var(--heading-font);
-		color: var(--primary-text);
-		font-size: 1.5em;
-	}
-	
-	.heart-animation-container {
-	display: inline-block;
-	position: relative;
-	width: 2em;
-	/* Adjust based on your h2 font-size */
-	height: 1.2em;
-	/* Height to match line-height */
-	vertical-align: middle;
-	margin: 0 0.3em;
-	/* Spacing between text */
-	}
-	
-	.heart-column {
-	position: absolute;
-	width: 0.4em;
-	height: 0.4em;
-	opacity: 0;
-	}
-	
-	.heart-small {
-	width: 0.4em;
-	height: 0.4em;
-	display: block;
-	filter: drop-shadow(0 0 2px rgba(0, 255, 0, 0.8)) brightness(1.2);
-	}
-	
-	.heart-large {
-		position: absolute;
-		width: auto;
-		height: auto;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		opacity: 0;
-		filter: drop-shadow(0 0 4px rgba(0, 255, 0, 0.6));
-	}
-
-}
 
 /*************************************************/
+/*************************************************/
 /*************** Universal Pages Styles **********/
+/*************************************************/
 /*************************************************/
 
 body.pages-body {

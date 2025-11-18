@@ -15,7 +15,6 @@
       // After Nav slides from top left, H1 slides from right 
       setTimeout(() => {
          const h1Element = document.getElementById('h1-animation');
-         h1Element.innerHTML = "Web Design for Creatives, Makers, and Business Owners";
          h1Element.classList.add('show');
          animationCompleted = true;
       }, 1000);
