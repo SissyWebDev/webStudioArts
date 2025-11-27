@@ -27,9 +27,16 @@ ol[role="list"] {
  list-style: none;
 }
 
+/* Hide scrollbar but keep functionality */
 html {
- max-width: 100%;
- overflow-x: hidden;
+  min-width: 100%;
+  overflow-x: hidden;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+html::-webkit-scrollbar {
+ display: none; /* Chrome/Safari/Opera */
 }
 
 /* Set core root defaults */
@@ -41,7 +48,7 @@ html:focus-within {
 body {
  min-height: 100vh;
  text-rendering: optimizeSpeed;
- line-height: 1.5;
+ /* line-height: 1.5; */
  width: 100%;
 }
 

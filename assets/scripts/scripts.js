@@ -1,3 +1,5 @@
+
+
 //**************************************************/
 //Scripts for homepage animation sequences  *******/
 //************************************************/
@@ -23,6 +25,12 @@
       setTimeout(() => {
          const logoContainer = document.getElementById('logo-container');
          logoContainer.classList.add('show');
+      }, 2000);
+
+      // Change nav.landing-nav from padding: 1rem to padding: 0;
+      setTimeout(() => {
+         const navAnimation = document.getElementById('nav-animation');
+         navAnimation.classList.add('show');
       }, 2000);
       
       //After logo loads, landing-content comes up from bottom right

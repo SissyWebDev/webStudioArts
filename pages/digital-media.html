@@ -12,8 +12,8 @@
    <meta name="author" content="cesily.stevens.webdev@gmail.com">
 
    <!--Style Sheets-->
-   <link rel="stylesheet" href="../../assets/styles/reset.css" />
-   <link rel="stylesheet" href="../../assets/styles/main.css" />
+   <link rel="stylesheet" href="../assets/styles/reset.css" />
+   <link rel="stylesheet" href="../assets/styles/main.css" />
    <!--Font Connections-->
    <link rel="preconnect" href="https://fonts.googleapis.com">
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,29 +44,19 @@
    
    <header class="pages-header">
       
-      <a href="../../index.html" class="pages-logo-link">
-         <div class="pages-logo-container">
-            <img src="../../assets/images/webStudioArts-Logo120w.webp"
-               alt="Logo Design: webStudioArts" width=100px>
-         </div>
-      </a>
-      
       <nav aria-label="main-navigation" class="pages-nav">
-
+         
+         <a href="../../index.html" class="pages-logo-link">
+            <div class="pages-logo-container">
+               <img src="../../assets/images/webStudioArts-Logo80.webp"
+                  alt="Logo Design: webStudioArts" width=100px>
+            </div>
+         </a>
+         
          <ul>
             <li><a href="digital-media.html" class="nav-link">digital</a></li>
             <li><a href="about.html" class="nav-link">about</a></li>
             <li><a href="contact.html" class="nav-link">contact</a></li>
-         </ul>
-         
-      </nav>
-      
-      <nav aria-label="secondary-navigation" class="pages-secondary-nav">
-         
-         <ul>
-            <li><a href="#web-based" class="nav-link">web based</a></li>
-            <li><a href="#graphics" class="nav-link">graphics</a></li>
-            <li><a href="#digital-art" class="nav-link">digital art</a></li>
          </ul>
          
       </nav>
@@ -76,12 +66,59 @@
       <h1 id="digimedi-h1" class="portfolio-section">
          Digital Design
       </h1>
+
+      <div class="illus-container">
+           <p class="illus-curly-left">{</p>
+
+         <picture>
+            <source media="(min-width: 576px)" srcset="../assets/images/IllusPanel2_16-9_600px.png">
+            <source media="(min-width: 360px)" srcset="../assets/images/IllusPanel2_16-9_400px.png">
+            <img src="../assets/images/IllusPanel2_16-9_400px.png" alt="Hand-drawn illustration representing digital designn process" class="about-illustration">
+         </picture>
+
+          <p class="illus-curly-right">}</p>
+      </div>
       
-      <section id="web-based" class="portfolio-section">
-         <h2>
-            Web Based
-         </h2>
-      </section>
+<section id="web-based" class="portfolio-section">
+   <h2>Web Based</h2>
+   
+   <article class="portfolio-item featured-tall">
+      <picture>
+         <source media="(min-width: 768px)" srcset="../../assets/images/web-based/featured-bespoke-large.webp">
+         <img src="../../assets/images/web-based/featured-bespoke-small.webp" 
+              alt="Featured Bespoke Build" 
+              loading="lazy">
+      </picture>
+   </article>
+   
+   <article class="portfolio-item featured-wide">
+      <picture>
+         <source media="(min-width: 768px)" srcset="../../assets/images/web-based/featured-design-large.webp">
+         <img src="../../assets/images/web-based/featured-design-small.webp" 
+              alt="Featured Site Design" 
+              loading="lazy">
+      </picture>
+   </article>
+   
+   <article class="portfolio-item small-square">
+      <picture>
+         <source media="(min-width: 768px)" srcset="../../assets/images/web-based/small-build-large.webp">
+         <img src="../../assets/images/web-based/small-build-small.webp" 
+              alt="Small Bespoke Build" 
+              loading="lazy">
+      </picture>
+   </article>
+   
+   <article class="portfolio-item small-square">
+      <picture>
+         <source media="(min-width: 768px)" srcset="../../assets/images/web-based/small-design-large.webp">
+         <img src="../../assets/images/web-based/small-design-small.webp" 
+              alt="Small Site Design" 
+              loading="lazy">
+      </picture>
+   </article>
+</section>
+
 
       <section id="graphics" class="portfolio-section">
          <h2>
@@ -96,28 +133,74 @@
       </section>
       
    </main>
-   <footer>
-    
+     <footer>
+       <div class="footer-left">
+          
+         <section aria-label="site-title" class="footer-title">webStudioArts</section>
          <address>
-            <span class="footer-title">webStudioArts</span><br />
-            Pacific Northwest<br />
-            From the Kalapuya Ilihi<br />
-            to the Salish Sea
+               
+            <p>Located in the Pacific Northwest <br class="footer-break1">From the Kalapuya Ilihi<br class="footer-break2">
+            to the Salish Sea</p>
+            
          </address>
-     
-         <h3>
-            Dreams to Digital
-         </h3>
-      
-         <nav aria-label="footer-navigation" class="footer-nav">
-
+          
+      </div>
+      <div class="footer-center">
+            <h3>
+               Dreams to Digital
+            </h3>
+      </div>
+         
+      <nav aria-label="footer-navigation" class="footer-nav">
+   
             <ul>
                <li><a href="digital-media.html" class="nav-link">digital</a></li>
-            <li><a href="about.html" class="nav-link">about</a></li>
-            <li><a href="contact.html" class="nav-link">contact</a></li>
+               <li><a href="about.html" class="nav-link">about</a></li>
+               <li><a href="contact.html" class="nav-link">contact</a></li>
             </ul>
-            
-         </nav>
-      </footer>
+               
+      </nav>
+   </footer>
+   
+<!-- SVG Clip-Path Definitions -->
+<svg width="0" height="0" style="position: absolute;" aria-hidden="true">
+   <defs>
+      <!-- Wavy bottom edge only -->
+            <clipPath id="wave-bottom" clipPathUnits="objectBoundingBox">
+         <path d="M 1,0.3896 
+                  c -0.1112,0 -0.2220,0.0556 -0.3332,0.0556 
+                  s -0.2218,-0.0556 -0.3332,-0.0556 
+                  S 0.1111,0.4453 0.0006,0.4453 
+                  c 0,-0.1296 0,-0.2834 0,-0.4162 
+                  c 0,-0.0158 0.0219,-0.0286 0.0490,-0.0286 
+                  h 0.9016 
+                  c 0.0270,0 0.0490,0.0128 0.0490,0.0286 
+                  v 0.3606 
+                  Z" />
+      </clipPath>
+      
+      <!-- Wavy top and bottom edges (matching waves) -->
+      <clipPath id="wave-both" clipPathUnits="objectBoundingBox">
+         <path d="M 0,0.06 
+                  Q 0.25,0 0.5,0.06 
+                  T 1,0.06 
+                  L 1,0.94 
+                  Q 0.75,1 0.5,0.94 
+                  T 0,0.94 
+                  Z" />
+      </clipPath>
+      
+      <!-- Wavy top edge only (matching bottom wave) -->
+      <clipPath id="wave-top" clipPathUnits="objectBoundingBox">
+         <path d="M 0,0.06 
+                  Q 0.25,0 0.5,0.06 
+                  T 1,0.06 
+                  L 1,1 
+                  L 0,1 
+                  Z" />
+      </clipPath>
+   </defs>
+</svg>
+
 </body>
       
