@@ -62,6 +62,9 @@ img,
 picture {
  max-width: 100%;
  display: block;
+ text-align: center;
+ font-size: 5vw;
+ margin: 0 auto;
 }
 
 /* Inherit fonts for inputs and buttons */
