@@ -1,0 +1,8 @@
+
+# Large source files
+*.psd
+*.ai
+
+# Large video files  
+*.mov
+assets/movies/

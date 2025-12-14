@@ -49,12 +49,12 @@ header.landing-header {
 
 nav.landing-nav {
 	opacity: 0;
-	will-change: contents,transform, opacity;
+	will-change: contents, transform, opacity;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	transform: translateX(-100%);
-	animation: slideInNav 1s ease-out forwards;
+	animation: 1000ms ease-out 3.28339ms 1 normal forwards running slideInNav;
 	background: var(--box-color);
 	border-top: var(--small-border);
 	border-right: var(--small-border);
@@ -64,6 +64,7 @@ nav.landing-nav {
 
 #nav-animation {
 	padding: 1rem;
+	transition: padding 1s ease-out;
 }
 
 #nav-animation.show {
@@ -97,8 +98,6 @@ nav.landing-nav ul.nav-links li {
 #logo-container {
 	opacity: 0;
 	pointer-events: none;
-	width: 0;
-	height: 0;
 	flex-shrink: 0;
 	transform: translateX(-100px);
 	transition: transform 1s ease-out, opacity 1s ease-out, width 1s ease-out, height 1s ease-out;
@@ -106,6 +105,7 @@ nav.landing-nav ul.nav-links li {
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
+	padding: 0;
 }
 
 #logo-container img {
@@ -118,11 +118,11 @@ nav.landing-nav ul.nav-links li {
 #logo-container.show {
 	opacity: 1;
 	pointer-events: auto;
-	width: auto;
-    height: auto;
-    padding: 1rem;
-    transform: translateX(0);
-    transition: transform 1s ease-out, opacity 1s ease-out, width 1s ease-out, height 1s ease-out, padding 1s ease-out;
+	width: 110px;
+	height: 110px;
+	padding: 1rem;
+	transform: translateX(0);
+	transition: transform 1s ease-out, opacity 1s ease-out, width 1s ease-out, height 1s ease-out, padding 1s ease-out;
 }
 
 .logo-link {
@@ -218,6 +218,10 @@ h2.landing {
 	letter-spacing: 0.015em;
 	color: var(--primary-text);
 	font-size: 1rem;
+}
+
+.landing-intro-br1 {
+	display: inline;
 }
 
 .landing-thanks {
@@ -412,7 +416,7 @@ h2.landing {
 		grid-column: span 8/-1;
 		grid-row: 2/span 2;
 		display: flex;
-		font-size: 3rem;
+		font-size: 2rem;
 		line-height: 1.1;
 		align-items: center;
 		text-align: left;
@@ -422,9 +426,17 @@ h2.landing {
 		padding-left: clamp(1rem, 0rem + 3vw, 3rem);
 		margin: 0;
 	}
+	
+	.break1 {
+	    display: none;
+	}
+
+	.break1-5 {
+	    display: inline;
+	}
 
 	.break2 {
-		display: inline;
+		display: none;
 	}
 
 	.break3 {
@@ -457,7 +469,7 @@ h2.landing {
 	}
 
 	h2.landing {
-		font-size: 2rem;
+		font-size: 3vw;
 		text-align: center;
 	}
 
@@ -472,6 +484,11 @@ h2.landing {
 /***********************************************/
 
 @media (min-width: 1200px) {
+
+	#logo-container.show {
+        height: auto;
+        width: 8vw;
+    }
 	h1.landing {
 		justify-content: left;
 		padding-left: 2rem;
@@ -494,6 +511,26 @@ h2.landing {
 	.break3 {
 		display: none;
 	}
+}
+
+/***********************************************/
+/************ Large Screens: 1750px+ ***********/
+/***********************************************/
+
+@media (min-width: 1750px) {
+
+	nav.landing-nav ul.nav-links {
+		font-size: 2vw;
+	}
+
+	h1.landing {
+		font-size: 5rem;
+	}
+
+    .landing-intro, .landing-thanks {
+        font-size: 2.25rem;
+        text-align: center;
+    }
 }
 
 /***********************************************/
@@ -626,15 +663,20 @@ main.landing-main > * {
 
 /* Animation States - Added via JS */
 .heart-column.animate {
-	animation: heart-fall 3s ease-in forwards,
-		heart-spin 1s linear infinite;
+	animation: heart-fall 3s ease-in forwards;
+}
+
+.heart-column.animate .heart-small {
+    animation: heart-spin 1s linear infinite;
 }
 
 .heart-column.animate.delay-1 {
+	animation: heart-fall 3.5s ease-in forwards; /* Slower */
 	animation-delay: 0s;
 }
 
 .heart-column.animate.delay-2 {
+	animation: heart-fall 2.5s ease-in forwards; /* Faster */
 	animation-delay: 0.3s;
 }
 
@@ -695,6 +737,13 @@ main.landing-main > * {
 /*************************************************/
 /*************************************************/
 
+/*********** No Animations on Reload *************/
+.skip-animations * {
+    animation-delay: 0s !important;
+    transition-delay: 0s !important;
+    animation-duration: 0s !important;
+    transition-duration: 0s !important;
+}
 
 /*************************************************/
 /*************************************************/
@@ -970,35 +1019,6 @@ main.main-digimedi .illus-container {
   background: var(--background-color);
 }
 
-.portfolio-entry > p {
-	display: flex;
-	flex-direction: column;
-	font-size: 7.5vw;
-	line-height: 1.25;
-	height: 100%;
-	justify-content: center;
-	padding: .25rem;
-	background-color: var(--primary-text);
-	color: var(--background-color);
-	align-items: center;
-	text-align: center;
-}
-
-/******** Responsive Headline font controls *******/
-.custom-font-1 {
-	font-size: 11vw;
-	line-height: 1.1;
-}
-
-.custom-font-2 {
-	font-size: 14vw;
-	line-height: .9;
-}
-
-.custom-font-3 {
-	font-size: 9vw;
-}
-
 .portfolio-section {
 	font-family: var(--alt-heading-font);
 	font-size: clamp(2rem, 7vw, 16rem);
@@ -1009,15 +1029,15 @@ main.main-digimedi .illus-container {
 	grid-column: 1 / 13;
 	grid-row: 1;
 	text-wrap: nowrap;
+	font-size: clamp(2.5rem, 8vw, 16rem);
 }
 
 .portfolio-section h3 {
 	grid-column: 1 / 13;
 	grid-row: 2;
 	text-wrap: wrap;
-	font-size: .75em;
+	font-size: .65em;
 	font-style: italic;
-	padding-left: 2%;
 	align-self: start;
 	margin: -12px 0 0 0; /* Pull up half the gap (24px / 2) */
 }
@@ -1061,6 +1081,32 @@ h2, h3, h4.portfolio-title {
   font-weight: 600;
 }
 
+.headline-divider {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  gap: 0.5rem;
+  font-size: 4vw;
+  background-color: var(--primary-text);
+  color: var(--background-color);
+  line-height: 1.25;
+}
+
+.headline-divider span {
+  display: block;
+  font-weight: 700;
+}
+
+.headline-divider span:nth-child(2)::after {
+  content: '';
+  display: block;
+  width: 95%;
+  height: 3px;
+  background-color: var(--background-color);
+  margin: 0.5em auto 0;
+}
 
 /********************************************************/
 /********* Pop out panel with mini case studies *********/
@@ -1270,7 +1316,7 @@ h2, h3, h4.portfolio-title {
    grid-row: 3;
    display: grid;
    grid-template-columns: repeat(12, 1fr);
-	grid-auto-rows: auto;
+   grid-auto-rows: auto;
    gap: 1rem; /* No gaps - items connect with waves */
    overflow: hidden;
    padding: 0;
@@ -1290,6 +1336,29 @@ h2, h3, h4.portfolio-title {
 	grid-column: 1/7;
 	grid-row: 5/8;
 	aspect-ratio: 4/7;
+	position: relative;
+}
+
+#bespoke-2 .headline-divider span:nth-child(1) {
+  letter-spacing: 0.6rem;
+  padding-left: 0.6rem; /* Match letter-spacing */
+}
+#bespoke-2 .headline-divider span:nth-child(2) {
+  letter-spacing: 0.3rem;
+  padding-left: 0.3rem;
+}
+#bespoke-2 .headline-divider span:nth-child(3) {
+  letter-spacing: 0.05rem;
+  padding-left: 0.05rem;
+}
+#bespoke-2 .headline-divider span:nth-child(4) {
+  letter-spacing: 0.6rem;
+  padding-left: 0.6rem;
+  margin-top: -3px;
+}
+
+#bespoke-icon1 {
+	display: none;
 }
 
 #bespoke-3 {
@@ -1301,25 +1370,119 @@ h2, h3, h4.portfolio-title {
 #bespoke-4 {
 	grid-column: 1/7;
 	grid-row: 8/11;
-	aspect-ratio: 4/7.4;
+	aspect-ratio: 4/8.38;
 }
 
 #bespoke-5 {
 	grid-column: 7/13;
 	grid-row: 8/10;
-	aspect-ratio: 4/4;
+	aspect-ratio: 1/1;
+	margin-bottom: 8vh;
+}
+
+#bespoke-icon2 {
+	display: none;
 }
 
 #bespoke-6 {
 	grid-column: 7/13;
 	grid-row: 10/11;
-	aspect-ratio: 4/3;
+	aspect-ratio: 1/1;
+	margin-top: -8vh;
 }
 
 #bespoke-7 {
 	grid-column: 1/13;
 	grid-row: 11/13;
 	aspect-ratio: 16/9;
+}
+
+@media (min-width: 576px) {
+  #bespoke {
+    width: 85%;
+    gap: 0.75rem; /* Reduce gap to tighten */
+    grid-template-rows: auto auto repeat(8, 1fr);
+    /* Or just use: grid-auto-rows: min-content; */
+  }
+
+  .portfolio-section h2 {
+    font-size: clamp(3rem, 10vw, 18rem);
+  }
+
+  .portfolio-section h3 {
+    margin: -16px 0 0 0;
+  }
+
+  /* Row 1: Single large item */
+  #bespoke-1 {
+    grid-column: 1 / 9;
+    grid-row: 3 / 7;
+    aspect-ratio: 16 / 9;
+    align-self: start; /* Changed from default */
+  }
+
+  /* Row 2: Three items */
+  #bespoke-2 {
+    grid-column: 9 / 13;
+    grid-row: 3 / 6;
+    aspect-ratio: 4/7;
+    align-self: start; /* Added */
+  }
+
+  #bespoke-icon1 {
+    grid-column: 1/5;
+    grid-row: 5;
+    display: block;
+    margin: 0 auto;
+    width: 78%;
+    align-self: center;
+  }
+  #bespoke-3 {
+    grid-column: 1 / 5;
+    grid-row: 6/9;
+    aspect-ratio: 4/7;
+    align-self: start; /* Changed from end */
+  }
+
+  #bespoke-4 {
+    grid-column: 9 / 13;
+    grid-row: 8/11;
+    aspect-ratio: 4/7;
+    align-self: end; /* Changed from end */
+  }
+
+  /* Row 3: Two items */
+  #bespoke-5 {
+    grid-column: 5 / 9;
+    grid-row: 5/7;
+    aspect-ratio: 1 / 1;
+    align-self: end; /* Added */
+    margin-bottom: 0;
+  }
+  #bespoke-icon2 {
+    grid-column: 9/13;
+    grid-row: 6/8;
+    display: block;
+    margin: 0 auto;
+    width: 72%;
+    align-self: center;
+  }    
+
+  #bespoke-6 {
+    grid-column: 5 / 9;
+    grid-row: 7/9;
+    aspect-ratio: 1 / 1;
+    align-self: start; /* Changed from end */
+    margin-top:  0;
+  }
+
+  /* Row 4: Single large item */
+  #bespoke-7 {
+    grid-column: 1 / 9;
+    grid-row: 9/11;
+    aspect-ratio: 16 / 9;
+    align-self: end; /* Changed from end */
+  }
 }
 
 /*Contiained in main.main-digimedi Grid*/
@@ -1356,6 +1519,24 @@ h2, h3, h4.portfolio-title {
 	aspect-ratio: 4/7;
 }
 
+#platform-3 .headline-divider span:nth-child(1) {
+  letter-spacing: 0.1rem;
+  padding-left: 0.1rem; /* Match letter-spacing */
+}
+#platform-3 .headline-divider span:nth-child(2) {
+  letter-spacing: 0.09rem;
+  padding-left: 0.09rem;
+}
+#platform-3 .headline-divider span:nth-child(3) {
+  letter-spacing: 0.15rem;
+  padding-left: 0.15rem;
+}
+#platform-3 .headline-divider span:nth-child(4) {
+  letter-spacing: 0.5rem;
+  padding-left: 0.5rem;
+  margin-top: -3px;
+}
+
 #platform-4 {
 	grid-column: 1/13;
 	grid-row: 8/10;
@@ -1387,6 +1568,68 @@ h2, h3, h4.portfolio-title {
 	width: 90%;
     justify-self: center;
 	position: relative;
+}
+
+/*Contiained in #animations-integrations Internal Grid*/
+
+#animations-integrations-1 {
+	grid-column: 1/13;
+	grid-row: 3/5;
+	aspect-ratio: 16/9;
+}
+
+#animations-integrations-2 {
+	grid-column: 1/13;
+	grid-row: 5/8;
+	aspect-ratio: 16/9;
+}
+
+#animations-integrations-3 {
+	grid-column: 1/7;
+	grid-row: 8/10;
+	aspect-ratio: 4/7;
+}
+
+#animations-integrations-4 {
+	grid-column: 7/13;
+	grid-row: 8/10;
+	aspect-ratio: 4/7;
+}
+
+#animations-integrations-4 .headline-divider span:nth-child(1) {
+  letter-spacing: 0.3rem;
+  padding-left: 0.3rem; /* Match letter-spacing */
+}
+#animations-integrations-4 .headline-divider span:nth-child(2) {
+  letter-spacing: 0.15rem;
+  padding-left: 0.15rem;
+}
+#animations-integrations-4 .headline-divider span:nth-child(3) {
+  letter-spacing: 0.2rem;
+  padding-left: 0.2rem;
+}
+#animations-integrations-4 .headline-divider span:nth-child(4) {
+  letter-spacing: 0.2rem;
+  padding-left: 0.2rem;
+  margin-top: -3px;
+}
+
+#animations-integrations-5 {
+	grid-column: 1/7;
+	grid-row: 10/12;
+	aspect-ratio: 1/1;
+}
+
+#animations-integrations-6 {
+	grid-column: 7/13;
+	grid-row: 10/12;
+	aspect-ratio: 1/1;
+}
+
+#animations-integrations-7 {
+	grid-column: 1/13;
+	grid-row: 12/15;
+	aspect-ratio: 16/9;
 }
 
 
@@ -1444,6 +1687,7 @@ h1.about-h1 {
   align-items: center;
   line-height: 1;
   width: 100%;
+  margin: 0 auto;
 }
 
 .illustration {

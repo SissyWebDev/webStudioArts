@@ -44,14 +44,20 @@
    <header class="landing-header">
          
      <nav class="landing-nav" id="nav-animation">
-           <!-- Logo stays outside the list -->
+
            <a href="index.html" class="logo-link">
              <div id="logo-container">
-               <img src="assets/images/logo-sizes/webStudioArts-Logo80.webp" alt="Logo Design: webStudioArts">
+               <picture>
+                 <source media="(min-width: 1200px)" srcset="../assets/images/logo-sizes/webStudioArts-Logo120w.webp">
+                 <source media="(min-width: 768px)" srcset="../assets/images/logo-sizes/webStudioArts-Logo100w.webp">
+                 <img src="../assets/images/logo-sizes/webStudioArts-Logo80.webp" alt="Logo Design: webStudioArts">
+               </picture>
              </div>
-           </a>
-           
-           <!-- Text navigation in proper list structure -->
+            </a>
+
+
+
+
            <ul class="nav-links">
              <li><a href="pages/digital-media.html" class="nav-link">digital</a></li>
              <li><a href="pages/about.html" class="nav-link">about</a></li>
@@ -93,7 +99,7 @@
          
          <div class="landing-intro">
             <p>   
-               I craft accessible websites for entrepreneurs and service professionals across the<span class="break-here"></span> Pacific Northwest. 
+               I craft accessible websites for entrepreneurs and service professionals across the <br class="landing-intro-br1">Pacific Northwest. 
             </p>
             
             <p>

@@ -4,8 +4,18 @@
 //Scripts for homepage animation sequences  *******/
 //************************************************/
 //Element #1: Animation Only Runs Once per Reload
+
+
 // Check if animation has already played this session
     const ANIMATION_KEY = 'landingAnimationPlayed';
+
+// Check if this is a page reload (hard refresh)
+      const isReload = performance.getEntriesByType('navigation')[0]?.type === 'reload';
+
+// If it's a reload, clear the animation flag so it plays again
+      if (isReload) {
+          sessionStorage.removeItem(ANIMATION_KEY);
+      }
     let animationCompleted = sessionStorage.getItem(ANIMATION_KEY) === 'true';
 
    //Element #2: Animation Only Runs Once per Reload--Wrap whole thing in "if" statement linked to sequence completion
@@ -18,7 +28,6 @@
       setTimeout(() => {
          const h1Element = document.getElementById('h1-animation');
          h1Element.classList.add('show');
-         animationCompleted = true;
       }, 1000);
       
       // After H1 completes (1s), show logo
@@ -50,7 +59,7 @@
       function triggerHeartAnimation() {
          // Start the falling hearts with cascade
          const columns = document.querySelectorAll('.heart-column');
-         console.log('Found columns:', columns.length); // Should show 3
+         console.log('Found columns:', columns.length); // Testing:Should show 3
          columns.forEach((col, index) => {
             col.classList.add('animate', `delay-${index + 1}`);
          });
@@ -84,7 +93,7 @@
       function showLandingThanks() {
          const landingThanks = document.querySelector('.landing-thanks');
          landingThanks.classList.add('show');
-         animationCompleted = true;
+         sessionStorage.setItem(ANIMATION_KEY, 'true');
         }
         
     } else {
@@ -93,9 +102,16 @@
         }
     
     function showAllElementsImmediately() {
+
+         // Add a class to bypass all CSS transitions/animations
+         document.querySelector('.landing-body').classList.add('skip-animations');
+       
         const h1 = document.getElementById('h1-animation');
         h1.innerHTML = "Web Design for Creatives, Makers, and Business Owners";
         h1.classList.add('show');
+
+         const nav = document.getElementById('nav-animation');
+         nav.classList.add('show');       
             
         document.getElementById('logo-container').classList.add('show');
         document.getElementById('landing-content').classList.add('show');
