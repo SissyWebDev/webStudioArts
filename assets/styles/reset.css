@@ -31,9 +31,11 @@ ol[role="list"] {
 html {
   min-width: 100%;
   overflow-x: hidden;
+  scroll-behavior: auto;  /* Disable smooth scroll on reload */
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE/Edge */
 }
+/* Force scroll to top on page load */
 
 html::-webkit-scrollbar {
  display: none; /* Chrome/Safari/Opera */
@@ -48,7 +50,7 @@ html:focus-within {
 body {
  min-height: 100vh;
  text-rendering: optimizeSpeed;
- /* line-height: 1.5; */
+ overflow-x: hidden;  /* Prevent horizontal scroll issues */
  width: 100%;
 }
 

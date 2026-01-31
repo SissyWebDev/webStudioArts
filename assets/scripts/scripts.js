@@ -1,3 +1,19 @@
+//*******************************************/ 
+//Force scroll to top on all pages load/reload
+//*******************************************/ 
+window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+};
+
+// Backup for browsers that don't support onbeforeunload properly
+if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+} else {
+    window.onbeforeunload = function () {
+        window.scrollTo(0, 0);
+    };
+}
+
 //**************************************************/
 //Scripts for homepage animation sequences  *******/
 //************************************************/
@@ -139,10 +155,43 @@ document.addEventListener('DOMContentLoaded', () => {
       return 0.25;
     }
   }
-  
+
+  // Single scroll tracking system
+  let lastScrollY = window.scrollY;
+  let isScrollingDown = true;
+  let hasScrolled = false;
+
+  // Update scroll direction
+  window.addEventListener('scroll', () => {
+    const wasFirstScroll = !hasScrolled;
+    hasScrolled = true;
+    
+    const currentScrollY = window.scrollY;
+    isScrollingDown = currentScrollY > lastScrollY;
+    lastScrollY = currentScrollY;
+    
+    // On first scroll, check what's already visible
+    if (wasFirstScroll && isScrollingDown) {
+      document.querySelectorAll('.portfolio-section').forEach(section => {
+        const rect = section.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight * 0.8; // 80% into viewport
+        
+        if (isVisible && !section.classList.contains('in-view')) {
+          section.classList.add('in-view');
+        }
+      });
+    }
+  }, { passive: true });
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
+      // Skip if user hasn't scrolled yet
+      if (!hasScrolled) {
+        return;
+      }
+      
+      // Only reveal if scrolling down AND intersecting AND not already visible
+      if (entry.isIntersecting && isScrollingDown && !entry.target.classList.contains('in-view')) {
         entry.target.classList.add('in-view');
         observer.unobserve(entry.target);
       }
@@ -150,31 +199,34 @@ document.addEventListener('DOMContentLoaded', () => {
   }, {
     threshold: getThreshold()
   });
-  
+
   document.querySelectorAll('.portfolio-section').forEach(section => {
     observer.observe(section);
   });
-  
+
 });
 
 //**************************************************/
 //******* Scripts for info-panel ******************/
 //************************************************/
 
-// Portfolio info panel toggle
+// Portfolio info panel toggle + Lightbox
 document.addEventListener('DOMContentLoaded', function() {
     
     // Get all portfolio entries
-    const portfolioEntries = document.querySelectorAll('.portfolio-entry');
+const portfolioEntries = document.querySelectorAll('.portfolio-entry');
+
+portfolioEntries.forEach(entry => {
+    const toggleBtn = entry.querySelector('.info-toggle');
+    const imgContainer = entry.querySelector('.portfolio-image');
     
-    portfolioEntries.forEach(entry => {
-        const toggleBtn = entry.querySelector('.info-toggle');
-        const closeBtn = entry.querySelector('.info-close');
-        const infoPanel = entry.querySelector('.info-panel');
-        
-        // Only add listeners if this entry has an info panel
-        if (!toggleBtn || !infoPanel) return;
-        
+    // Get the panel using data-portfolio attribute (now outside the entry)
+    const portfolioId = entry.id; // e.g., "platform-1"
+    const infoPanel = document.querySelector(`.info-panel[data-portfolio="${portfolioId}"]`);
+    const closeBtn = infoPanel ? infoPanel.querySelector('.info-close') : null;
+    
+    // INFO PANEL functionality
+    if (toggleBtn && infoPanel) {
         // Open panel
         toggleBtn.addEventListener('click', function(e) {
             e.stopPropagation();
@@ -183,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function() {
             toggleBtn.setAttribute('aria-expanded', 'true');
             
             // Initialize scroll indicator when panel opens
-            initScrollIndicator(entry);
+            initScrollIndicator(infoPanel); // Changed: pass panel instead of entry
         });
         
         // Close panel
@@ -201,7 +253,96 @@ document.addEventListener('DOMContentLoaded', function() {
                 }, 300);
             });
         }
+    }
+        // LIGHTBOX functionality
+    if (imgContainer) {
+            // Add cursor style and magnifying glass hint
+            imgContainer.style.cursor = 'zoom-in';
+            
+            // Click to open lightbox
+            imgContainer.addEventListener('click', function(e) {
+                // Don't open lightbox if clicking info toggle or panel
+                if (e.target.closest('.info-toggle') || 
+                    e.target.closest('.info-panel') ||
+                    e.target.closest('.portfolio-overlay')) {
+                    return;
+                }
+                
+                const img = this.querySelector('img');
+                if (img) {
+                    openLightbox(img.src, img.alt);
+                }
+            });
+            
+            // Show magnifying glass on hover (but not over info button)
+            imgContainer.addEventListener('mouseenter', function(e) {
+                if (!e.target.closest('.info-toggle')) {
+                    this.classList.add('lightbox-hover');
+                }
+            });
+            
+            imgContainer.addEventListener('mouseleave', function() {
+                this.classList.remove('lightbox-hover');
+            });
+            
+            // Remove hover effect when hovering over info button
+            if (toggleBtn) {
+                toggleBtn.addEventListener('mouseenter', function() {
+                    imgContainer.classList.remove('lightbox-hover');
+                });
+            }
+        }
     });
+    
+    // LIGHTBOX FUNCTIONS
+    function openLightbox(src, alt) {
+        const lightbox = document.createElement('div');
+        lightbox.className = 'lightbox';
+        lightbox.innerHTML = `
+            <div class="lightbox-backdrop"></div>
+            <div class="lightbox-content">
+                <button class="lightbox-close" aria-label="Close lightbox">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </button>
+                <img src="${src}" alt="${alt}">
+            </div>
+        `;
+        
+        document.body.appendChild(lightbox);
+        document.body.style.overflow = 'hidden';
+        
+        // Fade in
+        setTimeout(() => lightbox.classList.add('is-open'), 10);
+        
+        // Close on backdrop click
+        const backdrop = lightbox.querySelector('.lightbox-backdrop');
+        backdrop.addEventListener('click', () => closeLightbox(lightbox));
+        
+        // Close on button click
+        const closeButton = lightbox.querySelector('.lightbox-close');
+        closeButton.addEventListener('click', () => closeLightbox(lightbox));
+        
+        // Close on Esc key
+        function escHandler(e) {
+            if (e.key === 'Escape') {
+                closeLightbox(lightbox);
+                document.removeEventListener('keydown', escHandler);
+            }
+        }
+        document.addEventListener('keydown', escHandler);
+    }
+    
+    function closeLightbox(lightbox) {
+        lightbox.classList.remove('is-open');
+        document.body.style.overflow = '';
+        
+        // Timing for fade out transition
+        setTimeout(() => {
+            if (lightbox && lightbox.parentNode) {
+                lightbox.remove();
+            }
+        }, 300);
+    }
     
 });
 
@@ -217,7 +358,7 @@ function initScrollIndicator(entry) {
     
     function checkScroll() {
         const hasScroll = infoContent.scrollHeight > infoContent.clientHeight;
-        const isAtBottom = infoContent.scrollHeight - infoContent.scrollTop <= infoContent.clientHeight + 5;
+        const isAtBottom = infoContent.scrollHeight - infoContent.scrollTop <= infoContent.clientHeight;
         
         if (hasScroll && !isAtBottom) {
             scrollIndicator.classList.add('visible');
@@ -244,3 +385,29 @@ function initScrollIndicator(entry) {
     // Initial check
     checkScroll();
 }
+
+//*****************************************************************/
+//********* Lower Words and Bicycle animation scroll trigger ******/
+//*****************************************************************/
+
+// const bicycleAnimation = document.querySelector('.bicycle-animation');
+// const bicycleContainer = document.querySelector('.bicycle-animation-container');
+// const lowerWordAnimation = document.querySelector('.lower-words');
+
+// let hasScrolled = false;
+
+// Trigger animations on first scroll
+// window.addEventListener('scroll', function() {
+    // if (!hasScrolled) {
+        // hasScrolled = true;
+        
+        // Lower words animate
+        // lowerWordAnimation.classList.add('animate');
+        
+        // Bicycle animation sequence
+        // setTimeout(() => {
+            // bicycleAnimation.classList.add('animate');
+            // bicycleContainer.classList.add('animate');
+        // }, 500);
+    // }
+// }, { once: true });  // Automatically removes listener after first trigger
