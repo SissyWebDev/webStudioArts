@@ -63,28 +63,24 @@
 
    <main class="contact-page">
         <!-- Find Me Section -->
-        <section class="find-me-section">
-           
-            <h1 class="upper-title">
-                <span class="find-word">Find</span>
-                <span class="me-word">Me</span>
-            </h1>
-           
-            <div class="contact-info">
-                
-                <!--<a href="mailto:cesily@webstudioarts.com" class="contact-email">cesily<br>@webstudioarts<br>.com</a>-->
-                <a href="tel:5039744822" class="contact-phone">503.974.4822</a>
-               <h2 class="contact-name">
-                   <a 
-                      href="mailto:cesily@webstudioarts.com" 
-                      class="contact-email" 
-                      data-tooltip="Click to copy to clipboard">
-                      @webstudioarts.com
-                   </a>
-               </h2>
-               
-            </div>
-        </section>
+         <section class="find-me-section">
+             <h1 class="upper-title">
+                 <img src="../../assets/images/svg/FIND-title.svg" alt="Find" class="find-word">
+                 <img src="../../assets/images/svg/ME-title.svg" alt="Me" class="me-word">
+             </h1>
+             
+             <div class="contact-info">
+                 <a href="tel:5039744822" class="contact-phone">503.974.4822</a>
+                 <h2 class="contact-name">
+                     <a 
+                        href="mailto:cesily@webstudioarts.com" 
+                        class="contact-email" 
+                        data-tooltip="Click to copy to clipboard">
+                        @webstudioarts.com
+                     </a>
+                 </h2>
+             </div>
+         </section>
 
         <!-- Between Section -->
         <section class="lower-words">
@@ -150,15 +146,6 @@
    
    <!--Scripts-->
    <script src="../assets/scripts/scripts.js"></script>
-   
-   <script src="https://cdn.jsdelivr.net/npm/fitty@2.3.7/dist/fitty.min.js"></script>
-   <script>
-       fitty('.contact-name, .contact-email, .contact-phone', {
-             minSize: 30,  // minimum font size in pixels
-             maxSize: 1000,  // maximum font size in pixels
-             observeMutations: true
-         });
-   </script>
 
    <script>
       document.querySelector('.contact-email').addEventListener('click', function(e) {

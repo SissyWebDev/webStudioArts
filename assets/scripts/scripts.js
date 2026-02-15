@@ -50,12 +50,6 @@ if (document.querySelector('.landing-body')) {
             const logoContainer = document.getElementById('logo-container');
             logoContainer.classList.add('show');
         }, 2000);
-
-        // Change nav.landing-nav from padding: 1rem to padding: 0;
-        setTimeout(() => {
-            const navAnimation = document.getElementById('nav-animation');
-            navAnimation.classList.add('show');
-        }, 2000);
         
         //After logo loads, landing-content comes up from bottom right
         setTimeout(() => {
@@ -148,19 +142,14 @@ document.addEventListener('DOMContentLoaded', () => {
   
   function getThreshold() {
     const width = window.innerWidth;
-    
-    if (width < 576) {
-      return 0.15;
-    } else {
-      return 0.25;
-    }
+    return width < 576 ? 0.15 : 0.25;
   }
-
+  
   // Single scroll tracking system
   let lastScrollY = window.scrollY;
   let isScrollingDown = true;
   let hasScrolled = false;
-
+  
   // Update scroll direction
   window.addEventListener('scroll', () => {
     const wasFirstScroll = !hasScrolled;
@@ -172,9 +161,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // On first scroll, check what's already visible
     if (wasFirstScroll && isScrollingDown) {
-      document.querySelectorAll('.portfolio-section').forEach(section => {
+      document.querySelectorAll('.portfolio-section, .about-p-styles').forEach(section => {
         const rect = section.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight * 0.8; // 80% into viewport
+        const isVisible = rect.top < window.innerHeight * 0.8;
         
         if (isVisible && !section.classList.contains('in-view')) {
           section.classList.add('in-view');
@@ -182,15 +171,11 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   }, { passive: true });
-
+  
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      // Skip if user hasn't scrolled yet
-      if (!hasScrolled) {
-        return;
-      }
+      if (!hasScrolled) return;
       
-      // Only reveal if scrolling down AND intersecting AND not already visible
       if (entry.isIntersecting && isScrollingDown && !entry.target.classList.contains('in-view')) {
         entry.target.classList.add('in-view');
         observer.unobserve(entry.target);
@@ -199,11 +184,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }, {
     threshold: getThreshold()
   });
-
-  document.querySelectorAll('.portfolio-section').forEach(section => {
+  
+  // Observe all relevant sections on both pages
+  document.querySelectorAll('.portfolio-section, .about-p-styles').forEach(section => {
     observer.observe(section);
   });
-
 });
 
 //**************************************************/
