@@ -28,7 +28,7 @@
 
 body.landing-body {
 	background: linear-gradient(rgba(26, 26, 35, 0.75), rgba(26, 26, 35, 0.75)),
-		url("../../assets/images/MarbleBackGround.png") no-repeat center center fixed;
+		url("../../assets/images/MarbleBackGround.webp") no-repeat center center fixed;
 	background-size: cover;
 	display: flex;
 	flex-direction: column;
@@ -195,7 +195,7 @@ h1.landing {
     max-width: 800px;
     margin: auto auto 0 auto;
     min-height: 0;              /* let content determine height */
-    padding: 2rem 1rem 1.5rem;
+    padding: 1.25rem 1rem 1.5rem;
     gap: 1.5rem;                
     /* THIS IS THE KEY — makes children respond to actual space */
     container-type: size;
@@ -777,9 +777,7 @@ main.landing-main > * {
 /*************************************************/
 
 body.pages-body {
-	background: linear-gradient(rgb(26, 26, 35, 0.75), rgba(26, 26, 35, 0.75)),
-		url("../../assets/images/MarbleBackGround.png") no-repeat center center fixed;
-	background-size: cover;
+	background-color: #1a1a23;
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
