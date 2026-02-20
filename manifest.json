@@ -1,0 +1,9 @@
+{
+  "name": "webStudioArts",
+  "short_name": "webStudioArts",
+  "description": "Web Design for Creatives & Local Businesses | Pacific Northwest",
+  "start_url": "/index.html",
+  "display": "browser",
+  "background_color": "#454545",
+  "theme_color": "#1a1a23"
+}
